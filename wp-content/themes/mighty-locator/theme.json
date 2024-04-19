@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+        "color": {
+            "palette": [
+                {
+                    "name": "Mighty Blue",
+                    "slug": "mighty-blue",
+                    "color": "#014cb1"
+                },
+                {
+                    "name": "Mighty Orange",
+                    "slug": "mighty-orange",
+                    "color": "#f56504"
+                }
+            ],
+            "defaultPalette": false
+        }
+    },
+	"styles": {},
+	"customTemplates": {},
+	"templateParts": {},
+	"patterns": []
+}

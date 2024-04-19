@@ -1,0 +1,210 @@
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/frontend.scss ***!
+  \************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);
+/*!****************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/frontend.scss (1) ***!
+  \****************************************************************************************************************************/
+.colGr {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+}
+.colGr__col {
+  grid-column-start: auto;
+}
+.colGr__col_1 {
+  grid-column-end: span 1;
+}
+.colGr__col_2 {
+  grid-column-end: span 2;
+}
+.colGr__col_3 {
+  grid-column-end: span 3;
+}
+.colGr__col_4 {
+  grid-column-end: span 4;
+}
+.colGr__col_5 {
+  grid-column-end: span 5;
+}
+.colGr__col_6 {
+  grid-column-end: span 6;
+}
+.colGr__col_7 {
+  grid-column-end: span 7;
+}
+.colGr__col_8 {
+  grid-column-end: span 8;
+}
+.colGr__col_9 {
+  grid-column-end: span 9;
+}
+.colGr__col_10 {
+  grid-column-end: span 10;
+}
+.colGr__col_11 {
+  grid-column-end: span 11;
+}
+.colGr__col_12 {
+  grid-column-end: span 12;
+}
+.colGr__col_rightAlign {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container {
+  width: 100%;
+  max-width: 1448px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container_fullwidth {
+  max-width: 100%;
+}
+
+.ml {
+  font-family: "Roboto", sans-serif;
+}
+
+.ml {
+  background-color: rgb(245, 246, 254);
+  font-family: "Roboto", sans-serif;
+}
+.ml * {
+  box-sizing: border-box;
+}
+.ml_noHeader {
+  padding-top: 0;
+}
+
+.batchSkip__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.button_info,
+.badge_info {
+  background-color: var(--wp--preset--color--mighty-blue) !important;
+}
+
+.header {
+  background-color: white;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 24px;
+  padding: 24px 0;
+}
+.header .app-utilities {
+  display: flex;
+  align-items: center;
+}
+.header .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.header__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--mighty-blue);
+  color: white;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.card {
+  background-color: white;
+  border-radius: 4px;
+  padding: 24px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  height: 100%;
+}
+.card__grid {
+  gap: 24px;
+}
+.card__header {
+  display: grid;
+  grid-template-columns: [icon] 50px [title] auto;
+  column-gap: 24px;
+  margin-bottom: 24px;
+}
+.card__header_noIcon {
+  display: block;
+}
+.card__iconContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #edfdf6;
+}
+.card__title {
+  margin: 0;
+  line-height: 50px;
+  font-size: 1.125rem;
+  color: #252930;
+}
+.card__button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.inputForm .inputGroup {
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 0;
+  padding-right: 150px;
+  position: relative;
+}
+.inputForm .inputGroup__label {
+  color: #252930;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.inputForm .inputGroup__inputs {
+  display: flex;
+  gap: 10px;
+}
+.inputForm .inputGroup__input {
+  font-size: 0.875rem;
+  width: 100%;
+  opacity: 0.7;
+  letter-spacing: 0.3px;
+  padding: 0;
+  padding-bottom: 3px;
+  border-width: 0 0 1px 0;
+  border-color: #252930;
+  outline: none;
+}
+.inputForm .inputGroup__input[disabled] {
+  border-color: white;
+  background-color: white;
+}
+.inputForm .inputGroup__trigger {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border: 1px solid #dee2e6;
+  font-size: 0.875rem;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.inputForm__footer {
+  padding-top: 20px;
+}

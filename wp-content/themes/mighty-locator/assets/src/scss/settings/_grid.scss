@@ -1,0 +1,40 @@
+.colGr{
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+
+    &__col{
+
+        grid-column-start: auto;
+
+        @for $i from 1 through 12{
+
+            &_#{$i}{
+                grid-column-end: span #{$i};
+            }
+        }
+
+        &_rightAlign{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+    }
+
+}
+
+.container{
+
+    width: 100%;
+    max-width: calc( $containerWidth + 2 * $gutterWidth ) ;
+    padding-left: $gutterWidth;
+    padding-right: $gutterWidth;
+    margin-left: auto;
+    margin-right: auto;
+
+    &_fullwidth{
+        max-width: 100%;
+    }
+
+}

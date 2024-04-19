@@ -1,0 +1,21 @@
+.ml{
+
+    *{
+        box-sizing: border-box;
+    }
+
+    background-color: $lightGrey;
+    font-family: 'Roboto', sans-serif;
+
+    &_noHeader{
+        padding-top: 0;
+    }
+
+}
+
+.batchSkip__buttons{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
