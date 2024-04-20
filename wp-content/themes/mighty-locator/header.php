@@ -84,7 +84,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="<?php echo site_icon_url(); ?>" alt="logo"><span class="logo-text"></span></a>
+		            <a class="app-logo" href="<?php echo home_url(); ?>"><img class="logo-icon" src="<?php echo wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' )[0]; ?>" alt="<?php bloginfo(); ?>"></a>
 	
 		        </div><!--//app-branding-->  
 		        

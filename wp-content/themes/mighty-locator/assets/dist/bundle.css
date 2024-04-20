@@ -117,6 +117,13 @@
   font-size: 1rem;
   font-weight: 700;
 }
+.header .app-branding {
+  height: auto;
+}
+.header .app-branding .logo-icon {
+  height: 120px;
+  width: 120px;
+}
 
 .inputForm .inputGroup {
   border-bottom: 1px solid #dee2e6;
@@ -172,4 +179,22 @@
 
 #pms_recover_password_form .pms-form-fields-wrapper {
   text-align: left;
+}
+
+.accountWallet {
+  display: none;
+}
+.accountWallet ul li:not(:nth-child(5)) {
+  display: none;
+}
+.accountWallet .woocommerce-MyAccount-content {
+  display: none;
+}
+
+.woocommerceAccount .woocommerce-MyAccount-navigation {
+  display: none;
+}
+
+.woo-wallet-sidebar .card:nth-child(2) {
+  display: none;
 }

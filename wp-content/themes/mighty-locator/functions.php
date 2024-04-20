@@ -1,6 +1,7 @@
 <?php
 
 add_theme_support( 'menus' );
+add_theme_support( 'custom-logo' );
 
 add_action( 'init' , '___mlt__frontend_assets' );
 

@@ -16,7 +16,18 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_frontend_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/frontend.scss */ \"./assets/src/scss/frontend.scss\");\n/* harmony import */ var _js_inputGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/inputGroup */ \"./assets/src/js/inputGroup.js\");\n/* harmony import */ var _js_pms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/pms */ \"./assets/src/js/pms.js\");\n\n\n\n\n\n//# sourceURL=webpack://drawing-game/./assets/src/frontend.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_frontend_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/frontend.scss */ \"./assets/src/scss/frontend.scss\");\n/* harmony import */ var _js_inputGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/inputGroup */ \"./assets/src/js/inputGroup.js\");\n/* harmony import */ var _js_pms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/pms */ \"./assets/src/js/pms.js\");\n/* harmony import */ var _js_account__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/account */ \"./assets/src/js/account.js\");\n\n\n\n\n\n\n//# sourceURL=webpack://drawing-game/./assets/src/frontend.ts?");
+
+/***/ }),
+
+/***/ "./assets/src/js/account.js":
+/*!**********************************!*\
+  !*** ./assets/src/js/account.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst accountNav = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-account-navigation');\nconst accountNavLinks = jquery__WEBPACK_IMPORTED_MODULE_0___default()(accountNav).find('li');\nconst walletAccountLink = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.woocommerce-MyAccount-navigation-link--woo-wallet');\njquery__WEBPACK_IMPORTED_MODULE_0___default()(walletAccountLink).addClass('pms-account-navigation-link');\n\nconsole.log( walletAccountLink );\n\njquery__WEBPACK_IMPORTED_MODULE_0___default()(accountNavLinks[2]).after(walletAccountLink);\n\n//# sourceURL=webpack://drawing-game/./assets/src/js/account.js?");
 
 /***/ }),
 

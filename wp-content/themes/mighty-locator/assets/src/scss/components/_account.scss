@@ -1,0 +1,40 @@
+.accountWallet{
+
+    display: none;
+
+    ul{
+
+        li{
+
+            &:not(:nth-child(5)){
+                display: none;
+            }
+        }
+
+    }
+
+    .woocommerce-MyAccount-content{
+        display: none;
+    }
+
+}
+
+.woocommerceAccount{
+
+    .woocommerce-MyAccount-navigation{
+        display: none;
+    }
+
+}
+
+.woo-wallet-sidebar{
+
+    .card{
+
+        &:nth-child(2){
+            display: none;
+        }
+        
+    }
+
+}
