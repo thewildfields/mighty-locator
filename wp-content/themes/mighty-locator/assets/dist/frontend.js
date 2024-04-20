@@ -16,7 +16,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_frontend_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/frontend.scss */ \"./assets/src/scss/frontend.scss\");\n/* harmony import */ var _js_inputGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/inputGroup */ \"./assets/src/js/inputGroup.js\");\n\n\n\n\n//# sourceURL=webpack://drawing-game/./assets/src/frontend.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_frontend_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/frontend.scss */ \"./assets/src/scss/frontend.scss\");\n/* harmony import */ var _js_inputGroup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/inputGroup */ \"./assets/src/js/inputGroup.js\");\n/* harmony import */ var _js_pms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/pms */ \"./assets/src/js/pms.js\");\n\n\n\n\n\n//# sourceURL=webpack://drawing-game/./assets/src/frontend.ts?");
 
 /***/ }),
 
@@ -28,6 +28,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scs
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst inputGroupTrigger = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.inputGroup__trigger');\n\nconst userID = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#current-user-id').val();\n\njquery__WEBPACK_IMPORTED_MODULE_0___default()(inputGroupTrigger).on( 'click' , function(){\n\n    const group = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('.inputGroup');\n    const inputs  = jquery__WEBPACK_IMPORTED_MODULE_0___default()(group).find('.inputGroup__input');\n\n    switch ( jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-action') ) {\n        case 'enable':\n            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text('Update');\n            jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs).removeAttr('disabled');\n            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr( 'data-action' , 'update' );\n            break;\n        case 'update':\n            const data = {\n                action: 'update_user_info',\n                userID: userID,\n                infoType: jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs[0]).data('user-info-type'),\n                info: jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs[0]).data('user-info'),\n                value: jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs[0]).val(),\n                nonce: 'nonce'\n            }\n            jquery__WEBPACK_IMPORTED_MODULE_0___default()(inputs).attr( 'disabled' , 'disabled' );\n            console.log( data );\n            jquery__WEBPACK_IMPORTED_MODULE_0___default().post(\n                ajaxObject.admin_ajax_url,\n                data,\n                function( response ){\n                    console.log( response );\n                }\n            )\n            break;\n    }\n\n\n})\n\n//# sourceURL=webpack://drawing-game/./assets/src/js/inputGroup.js?");
+
+/***/ }),
+
+/***/ "./assets/src/js/pms.js":
+/*!******************************!*\
+  !*** ./assets/src/js/pms.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\n\njquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-form input[type=\"text\"]').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-form input[type=\"number\"]').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-form input[type=\"password\"]').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-form input[type=\"email\"]').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('.pms-form .pms-form-submit').addClass('form-control btn button_info');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#pms_login input').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#pms_login input[type=\"checkbox\"]').removeClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#pms_login #wp-submit').addClass('form-control btn button_info');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#pms_recover_password_form input').addClass('form-control');\njquery__WEBPACK_IMPORTED_MODULE_0___default()('#pms_recover_password_form input[type=\"submit\"]').addClass('btn button_info');\n\n//# sourceURL=webpack://drawing-game/./assets/src/js/pms.js?");
 
 /***/ }),
 
