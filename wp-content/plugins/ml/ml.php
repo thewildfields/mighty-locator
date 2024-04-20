@@ -11,7 +11,8 @@ function ___mlp__user_check(){
 
 	if(
 		!is_page( get_page_by_path( 'login' )->ID ) &&
-		!is_page( get_page_by_path( 'signup' )->ID )
+		!is_page( get_page_by_path( 'password-reset' )->ID ) &&
+		!is_page( get_page_by_path( 'register' )->ID )
 	) {
 
 		if( !is_user_logged_in() ){
@@ -20,7 +21,7 @@ function ___mlp__user_check(){
 
 	}
 
-	if( is_page( get_page_by_path( 'signup' )->ID ) ) {
+	if( is_page( get_page_by_path( 'register' )->ID ) ) {
 
 		if( is_user_logged_in() ){
 			wp_redirect( home_url() , 301 );
@@ -30,17 +31,6 @@ function ___mlp__user_check(){
 
 }
 
-register_activation_hook( __FILE__ , '___mlp__register_user_roles' );
-
-function ___mlp__register_user_roles(){
-
-	$author = get_role('author');
-
-	add_role( 'ml_starter', 'Starter', $author->capabilities );
-	add_role( 'ml_pro', 'Professional', $author->capabilities );
-	add_role( 'ml_enterprise', 'Enterprise', $author->capabilities );
-
-}
 
 function admin_default_page() {
 	return home_url();
