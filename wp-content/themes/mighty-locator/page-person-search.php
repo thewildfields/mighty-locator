@@ -2,15 +2,33 @@
 
 get_header();
 
-$membershipRoles = [
-    'ml_starter',
-    'ml_pro',
-    'ml_enterprise'
-];
+require_once ABSPATH . 'wp-admin/includes/user.php';
+$roles = get_editable_roles();
 
-$userCurrentRole = wp_get_current_user()->roles[0];
+if( pms_is_member( get_current_user_id() ) ){
+	
+	$memberData = pms_get_member( get_current_user_id() );
+	$planID = $memberData->subscriptions[0]['subscription_plan_id'];
 
-$userCurrentRoleDisplayName = $wp_roles->roles[$userCurrentRole]['name'];
+	$planActive = null;
+
+	if( 'active' == $memberData->subscriptions[0]['status']){
+
+		$planActive = true;
+
+		$plan = $roles[ 'pms_subscription_plan_' . $planID ];
+		$planName = $plan['name'];
+
+		if( have_rows( 'user_tiers' , 'option' ) ) : while( have_rows( 'user_tiers' , 'option' ) ) : the_row();
+			if( get_sub_field( 'user_role') == $planName ){
+				$searchPrice = get_sub_field('price_per_skip');
+			}
+		endwhile; endif;
+	}
+
+	$walletBalance = woo_wallet()->wallet->get_wallet_balance( get_current_user_id() , true); 
+
+}
 
 ?>
 
@@ -22,7 +40,7 @@ $userCurrentRoleDisplayName = $wp_roles->roles[$userCurrentRole]['name'];
 			
 			<div class="row g-4 mb-4">				
 				<div class="col-12">
-					<div class="app-card app-card-chart h-100 shadow-sm">
+					<div class="app-card app-card-chart shadow-sm">
 						<div class="app-card-header p-3">
 							<div class="row justify-content-between align-items-center">
 								<div class="col-auto">
@@ -33,38 +51,55 @@ $userCurrentRoleDisplayName = $wp_roles->roles[$userCurrentRole]['name'];
 						<div class="app-card-body p-3 p-lg-4">
 							<div class="row">
 								<div class="col-6">
-									<form class="skipForm skipForm_single" method="POST">
-										<input type="text" class="hidden" name="skip-author-id" style="display: none" value="<?php echo get_current_user_id(); ?>">
-										<div class="row">
-											<div class="col-md-6 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-first-name">First Name</label>
-												<input id="skip-first-name" name="skip-first-name" type="text" class="form-control skip-first-name" placeholder="First Name">
+									<?php if( pms_is_member( get_current_user_id() ) && $planActive && $walletBalance > $searchPrice ){ ?>
+										<form class="skipForm skipForm_single" method="POST">
+											<input type="text" class="hidden" id="skip-author-id" name="skip-author-id" style="display: none" value="<?php echo get_current_user_id(); ?>">
+											<input type="text" class="hidden" id="skip-author-plan" name="skip-author-plan" style="display: none" value="<?php echo $planName; ?>">
+											<input type="text" class="hidden" id="skip-price" name="skip-price" style="display: none" value="<?php echo $searchPrice; ?>">
+											<input type="text" class="hidden" id="skip-balance" name="skip-balance" style="display: none" value="<?php echo $walletBalance; ?>">
+											<div class="row">
+												<div class="col-md-6 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-first-name">First Name</label>
+													<input id="skip-first-name" name="skip-first-name" type="text" class="form-control skip-first-name" placeholder="First Name">
+												</div>
+												<div class="col-md-6 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-last-name">Last Name</label>
+													<input id="skip-last-name" name="skip-last-name" type="text" class="form-control skip-last-name" placeholder="last Name">
+												</div>
+												<div class="col-md-12 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-street-address">Street Address</label>
+													<input id="skip-street-address" name="skip-street-address" type="text" class="form-control skip-street-address" placeholder="Street Address">
+												</div>
+												<div class="col-md-4 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-city">City</label>
+													<input id="skip-city" name="skip-city" type="text" class="form-control skip-city" placeholder="City">
+												</div>
+												<div class="col-md-4 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-state">State</label>
+													<input id="skip-state" name="skip-state" type="text" class="form-control skip-state" placeholder="State">
+												</div>
+												<div class="col-md-4 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-zip">ZIP</label>
+													<input id="skip-zip" name="skip-zip" type="text" class="form-control skip-zip" placeholder="ZIP">
+												</div>
+												<div class="col-md-6 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-phone">Phone</label>
+													<input id="skip-phone" name="skip-phone" type="text" class="form-control skip-phone" placeholder="Phone">
+												</div>
+												<div class="col-md-6 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-email">Email</label>
+													<input id="skip-email" name="skip-email" type="email" class="form-control skip-email" placeholder="Email">
+												</div>
+												<div class="col-md-12 col-sm-12 mb-3">
+													<label class="sr-only" for="skip-relatives">Relatives, list multiple using commas</label>
+													<input id="skip-relatives" name="skip-relatives" type="text" class="form-control skip-relatives" placeholder="Relatives, list multiple using commas">
+												</div>
 											</div>
-											<div class="col-md-6 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-last-name">Last Name</label>
-												<input id="skip-last-name" name="skip-last-name" type="text" class="form-control skip-last-name" placeholder="last Name">
+											<div class="text-center">
+												<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto single-skip button_info">Search</button>
 											</div>
-											<div class="col-md-12 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-street-address">Street Address</label>
-												<input id="skip-street-address" name="skip-street-address" type="text" class="form-control skip-street-address" placeholder="Street Address">
-											</div>
-											<div class="col-md-4 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-city">City</label>
-												<input id="skip-city" name="skip-city" type="text" class="form-control skip-city" placeholder="City">
-											</div>
-											<div class="col-md-4 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-state">State</label>
-												<input id="skip-state" name="skip-state" type="text" class="form-control skip-state" placeholder="State">
-											</div>
-											<div class="col-md-4 col-sm-12 mb-3">
-												<label class="sr-only" for="skip-zip">ZIP</label>
-												<input id="skip-zip" name="skip-zip" type="text" class="form-control skip-zip" placeholder="ZIP">
-											</div>
-										</div>
-										<div class="text-center">
-											<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto single-skip button_info">Search</button>
-										</div>
-									</form>
+										</form>
+									<?php } ?>
 								</div>
 								<div class="col-6">
 									<div class="app-card app-card-basic d-flex flex-column align-items-start">
@@ -76,26 +111,32 @@ $userCurrentRoleDisplayName = $wp_roles->roles[$userCurrentRole]['name'];
 											</div>
 										</div>
 										<div class="app-card-body px-4">
-											<?php if( have_rows( 'user_tiers' , 'option' ) ) : while( have_rows( 'user_tiers' , 'option' ) ) : the_row(); ?>
-												<?php if( get_sub_field( 'user_role' ) == $userCurrentRole ) { ?>
-													<div class="intro"><strong>$250</strong> current balance</div>
-													<div class="intro"><strong>$<?php the_sub_field('price_per_skip'); ?></strong> per search</div>
-												<?php } ?>
-											<?php endwhile; endif; ?>
+											<?php if( pms_is_member( get_current_user_id() ) && $planActive ){ ?>
+												<?php if( $walletBalance < $searchPrice ){ ?>
+													<div class="intro"><strong>Not enough funds on a balance</strong></div>
+												<?php } else { ?>
+													<div class="intro">
+														<strong>$<span id="current-balance"><?php echo $walletBalance; ?></span></strong> current balance
+													</div>
+													<div class="intro"><strong>$<?php echo $searchPrice; ?></strong> per search</div>
+												<?php }
+											} ?>
+
 										</div>
 										<div class="app-card-footer p-4 mt-auto">
-											<a class="btn app-btn-secondary" href="<?php echo home_url('/settings'); ?>">Buy more searches</a>
+											<a class="btn app-btn-secondary" target="_blank" href="<?php echo home_url('/my-account/woo-wallet/add'); ?>">Add money to wallet</a>
 										</div>
 									</div>
 								</div>
-								<div class="col-12 pt-4" id="fast-skip-result" style="max-height: 0; opacity: 0;">
-									<div class="app-card shadow-sm">
-										<div class="app-card-header px-4 py-3">
+								<div class="col-12 pt-4" id="fast-skip-result" style="max-height: auto; opacity: 0;">
+									<!-- <div class="app-card shadow-sm">
+										<div class="app-card-header px-4 py-3 searchResult__header">
 											<div class="mb-2"><span class="badge bg-info" id="fast-skip-status"></span></div>
 											<h4 class="mb-1" id="fast-skip-name"></h4>
 										</div>
 										<div class="app-card-body pt-4 px-4">
-											<div class="notification-content" id="fast-skip-content"></div>
+											<div class="notification-content" id="fast-skip-content">
+											</div>
 										</div>
 										<div class="app-card-footer px-4 py-3">
 											<a class="action-link" id="fast-skip-link" href="<?php echo home_url() . '/membership'; ?>">
@@ -105,7 +146,7 @@ $userCurrentRoleDisplayName = $wp_roles->roles[$userCurrentRole]['name'];
 												</svg>
 											</a>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</row>
 						</div>

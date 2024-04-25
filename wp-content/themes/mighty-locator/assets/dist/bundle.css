@@ -198,3 +198,7 @@
 .woo-wallet-sidebar .card:nth-child(2) {
   display: none;
 }
+
+.wc-block-components-checkout-return-to-cart-button {
+  display: none;
+}
