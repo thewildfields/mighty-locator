@@ -5,6 +5,7 @@
  * Author: Oleksii Tsioma
  */
 
+
 add_action( 'wp' , '___mlp__user_check' );
 
 function ___mlp__user_check(){
@@ -73,6 +74,8 @@ require plugin_dir_path( __FILE__ ) . '/inc/cpt/user-group-cpt.php';
 
 function single_skip(){
 
+	global $wpdb;
+
 	$skipData = $_POST['skipData'];
 
 	$skip = wp_remote_post(
@@ -86,12 +89,12 @@ function single_skip(){
 			'body' => json_encode(
 				array(
 					'api_key' => 'h6m8LA8YBUib2uTWZuUp65d869bb0dc69xissI',
-					'last_name' => $skipData['lastName'],
-					'first_name' => $skipData['firstName'],
-					'mailing_address' => $skipData['streetAddress'],
-					'mailing_city' => $skipData['city'],
-					'mailing_state' => $skipData['state'],
-					'mailing_zip' => $skipData['zip']
+					'last_name'			=> $skipData['lastName'],
+					'first_name'		=> $skipData['firstName'],
+					'mailing_address'	=> $skipData["streetAddress"],
+					'mailing_city'		=> $skipData["city"],
+					'mailing_state'		=> $skipData["state"],
+					'mailing_zip'		=> $skipData["zip"]
 				)
 			)
 		)
@@ -118,9 +121,31 @@ function single_skip(){
 			)
 		);
 
+		$response['skip'] = $skip;
+		$response['authorID'] = $skipData['authorID'];
+		$response['authorPlan'] = $skipData['authorPlan'];
+		$response['price'] = $skipData['price'];
+		$response['balance'] = round( woo_wallet()->wallet->get_wallet_balance( $skipData['authorID'] , true) , 2, PHP_ROUND_HALF_UP );
+
+		$wpdb->insert(
+			$wpdb->prefix . 'woo_wallet_transactions',
+			[
+				'blog_id' => 1,
+				'user_id' => $skipData['authorID'],
+				'type' => 'debit',
+				'amount' => $skipData['price'],
+				'balance' => $skipData['balance'] - $skipData['price'],
+				'currency' => 'USD',
+				'created_by' => $skipData['authorID'],
+				'date' => time()
+			]
+		);
+
+		$response['balance'] = $skipData['balance'] - $skipData['price'];
+
 		if( !is_wp_error( $skipPost ) ){
 
-			print_r( json_encode( $skip ) );
+			print_r( json_encode( $response ) );
 
 		}
 
@@ -144,9 +169,14 @@ function batchSkip( $skipData ) {
 			),
 			'body' => json_encode(
 				array(
-					'api_key' => 'h6m8LA8YBUib2uTWZuUp65d869bb0dc69xissI',
-					'last_name' => $skipData['lastName'],
-					'first_name' => $skipData['firstName']
+					'api_key'			=> 'h6m8LA8YBUib2uTWZuUp65d869bb0dc69xissI',
+					'last_name'			=> $skipData['lastName'],
+					'first_name'		=> $skipData['firstName'],
+					'authorPlan'		=> $skipData['authorPlan'],
+					'mailing_address'	=> $skipData["streetAddress"],
+					'mailing_city'		=> $skipData["city"],
+					'mailing_state'		=> $skipData["state"],
+					'mailing_zip'		=> $skipData["zip"]
 				)
 			)
 		)
@@ -206,3 +236,4 @@ function update_user_info(){
 
 add_action( 'wp_ajax_update_user_info' , 'update_user_info' );
 add_action( 'wp_ajax_nopriv_update_user_info' , 'update_user_info' );
+
