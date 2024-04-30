@@ -10,25 +10,25 @@ add_action( 'wp' , '___mlp__user_check' );
 
 function ___mlp__user_check(){
 
-	// if(
-	// 	!is_page( get_page_by_path( 'login' )->ID ) &&
-	// 	!is_page( get_page_by_path( 'password-reset' )->ID ) &&
-	// 	!is_page( get_page_by_path( 'register' )->ID )
-	// ) {
+	if(
+		!is_page( get_page_by_path( 'login' )->ID ) &&
+		!is_page( get_page_by_path( 'password-reset' )->ID ) &&
+		!is_page( get_page_by_path( 'register' )->ID )
+	) {
 
-	// 	if( !is_user_logged_in() ){
-	// 		wp_redirect( home_url( '/login/') , 301 );
-	// 	}
+		if( !is_user_logged_in() ){
+			wp_redirect( home_url( '/login/') , 301 );
+		}
 
-	// }
+	}
 
-	// if( is_page( get_page_by_path( 'register' )->ID ) ) {
+	if( is_page( get_page_by_path( 'register' )->ID ) ) {
 
-	// 	if( is_user_logged_in() ){
-	// 		wp_redirect( home_url() , 301 );
-	// 	}
+		if( is_user_logged_in() ){
+			wp_redirect( home_url() , 301 );
+		}
 
-	// }
+	}
 
 }
 
