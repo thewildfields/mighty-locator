@@ -28,7 +28,7 @@ if( !get_user_meta( get_current_user_id(), 'free_searched_assigned', true ) ){
 	}
 	
 	$percentage = 25;
-	if( boolval( get_user_meta( get_current_user_id() , 'profile_completed' ) ) ){
+	if( get_user_meta( get_current_user_id() , 'profile_completed' == 1 ) ){
 		$percentage += 25;
 	}
 	if( get_user_meta( get_current_user_id() , 'subscribed_to_youtube' ) ){
