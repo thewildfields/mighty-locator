@@ -60,3 +60,17 @@ function ___mlt__frontend_assets(){
     );
 
 }
+
+function subscribe_to_youtube(){
+    update_user_meta( $_POST['userId'] , 'subscribed_to_youtube' , 1 );
+}
+
+add_action( 'wp_ajax_subscribe_to_youtube' , 'subscribe_to_youtube' );
+add_action( 'wp_ajax_nopriv_subscribe_to_youtube' , 'subscribe_to_youtube' );
+
+function subscribe_to_facebook(){
+    update_user_meta( $_POST['userId'] , 'subscribed_to_facebook' , 1 );
+}
+
+add_action( 'wp_ajax_subscribe_to_facebook' , 'subscribe_to_facebook' );
+add_action( 'wp_ajax_nopriv_subscribe_to_facebook' , 'subscribe_to_facebook' );

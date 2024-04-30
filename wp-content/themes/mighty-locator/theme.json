@@ -16,6 +16,59 @@
                 }
             ],
             "defaultPalette": false
+        },
+        "typography": {
+            "fontSizes": [
+                {
+                    "name": "Small",
+                    "slug": "small",
+                    "size": "0.875rem"
+                },
+                {
+                    "name": "Medium",
+                    "slug": "medium",
+                    "size": "1rem"
+                },
+                {
+                    "name": "Large",
+                    "slug": "large",
+                    "size": "1.5rem"
+                },
+                {
+                    "name": "X-Large",
+                    "slug": "x-large",
+                    "size": "2rem"
+                }
+            ]
+        },
+        "spacing": {
+            "spacingSizes": [
+                {
+                    "name": "X-Small",
+                    "slug": "x-small",
+                    "size": "5px"
+                },
+                {
+                    "name": "Small",
+                    "slug": "small",
+                    "size": "10px"
+                },
+                {
+                    "name": "Medium",
+                    "slug": "medium",
+                    "size": "20px"
+                },
+                {
+                    "name": "Large",
+                    "slug": "large",
+                    "size": "40px"
+                },
+                {
+                    "name": "X-Large",
+                    "slug": "x-large",
+                    "size": "80px"
+                }
+            ]
         }
     },
 	"styles": {},

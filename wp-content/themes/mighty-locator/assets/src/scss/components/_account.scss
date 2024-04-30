@@ -39,6 +39,18 @@
 
 }
 
-.wc-block-components-checkout-return-to-cart-button{
+.wc-block-components-checkout-return-to-cart-button,
+.wc-block-components-product-metadata,
+.pms-account-subscription-action-link__abandon{
     display: none;
+}
+
+#basic-user-avatar-form,
+#basic-user-avatar-form p:nth-child(4),
+#basic-user-avatar-form p:nth-child(5){
+    display: none;
+}
+
+#pms_edit-profile-form + #basic-user-avatar-form{
+    display: block;
 }

@@ -125,28 +125,12 @@ if( pms_is_member( get_current_user_id() ) ){
 										</div>
 										<div class="app-card-footer p-4 mt-auto">
 											<a class="btn app-btn-secondary" target="_blank" href="<?php echo home_url('/my-account/woo-wallet/add'); ?>">Add money to wallet</a>
+											<a class="btn app-btn-secondary" href="<?php echo home_url('/skips-archive'); ?>">My searches archive</a>
 										</div>
 									</div>
 								</div>
-								<div class="col-12 pt-4" id="fast-skip-result" style="max-height: auto; opacity: 0;">
-									<!-- <div class="app-card shadow-sm">
-										<div class="app-card-header px-4 py-3 searchResult__header">
-											<div class="mb-2"><span class="badge bg-info" id="fast-skip-status"></span></div>
-											<h4 class="mb-1" id="fast-skip-name"></h4>
-										</div>
-										<div class="app-card-body pt-4 px-4">
-											<div class="notification-content" id="fast-skip-content">
-											</div>
-										</div>
-										<div class="app-card-footer px-4 py-3">
-											<a class="action-link" id="fast-skip-link" href="<?php echo home_url() . '/membership'; ?>">
-												Upgrade your membership to see more data!
-												<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ms-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-												</svg>
-											</a>
-										</div>
-									</div> -->
+								<div class="col-12 pt-4" id="fast-skip-result" style="max-height: 0; opacity: 0">
+									<?php echo get_template_part( 'templates/person-search' , 'result' ); ?>
 								</div>
 							</row>
 						</div>

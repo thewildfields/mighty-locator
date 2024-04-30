@@ -1,11 +1,17 @@
 // Layout
-
 $containerWidth: 1400px;
 $gutterWidth: 24px;
 
 // Colors
-
 $lightGrey: rgb(245, 246, 254);
 $grey: #dee2e6;
 $darkGrey: #252930;
 $lightGreen: #edfdf6;
+$mightyBlue: #014cb1;
+
+// Media Breakpoints
+$phoneWidthMax: 767px;
+$tabletWidthMin: 768px;
+$tabletWidthMax: 1199px;
+$desktopWidthMin: 1200px;
+$largeDesktopWidthMin: 1600px;
