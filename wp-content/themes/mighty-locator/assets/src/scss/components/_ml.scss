@@ -11,10 +11,10 @@
         padding-top: 0;
     }
 
-}
+    a, .text-success{
+        color: $mightyBlue!important;
+    }
 
-a, .text-success{
-    color: $mightyBlue!important;
 }
 
 .batchSkip__buttons{
