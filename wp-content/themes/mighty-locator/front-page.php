@@ -28,13 +28,13 @@ if( !get_user_meta( get_current_user_id(), 'free_searched_assigned', true ) ){
 	}
 	
 	$percentage = 25;
-	if( get_user_meta( get_current_user_id() , 'profile_completed' == 1 ) ){
+	if( get_user_meta( get_current_user_id() , 'profile_completed' , true ) ){
 		$percentage += 25;
 	}
-	if( get_user_meta( get_current_user_id() , 'subscribed_to_youtube' ) ){
+	if( get_user_meta( get_current_user_id() , 'subscribed_to_youtube' , true ) ){
 		$percentage += 25;
 	}
-	if( get_user_meta( get_current_user_id() , 'subscribed_to_facebook' ) ){
+	if( get_user_meta( get_current_user_id() , 'subscribed_to_facebook' , true ) ){
 		$percentage += 25;
 	}
 	
