@@ -11,14 +11,19 @@
         padding-top: 0;
     }
 
-    a, .text-success{
-        color: $mightyBlue!important;
-    }
 
     #wpadminbar a{
-        color: inherit!important;
+        color: #f0f0f1!important;
     }
 
+}
+
+a,
+.text-success,
+.text-link,
+.register,
+.lostpassword{
+    color: $mightyBlue!important;
 }
 
 .batchSkip__buttons{

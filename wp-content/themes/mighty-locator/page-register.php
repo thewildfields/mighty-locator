@@ -15,11 +15,15 @@ get_header('login'); ?>
 				</div>
 				<h2 class="auth-heading text-center mb-4">Sign up to Portal</h2>
 				<div class="auth-form-container text-start mx-auto">
-
-					<?php echo do_shortcode( '[pms-register subscription_plans="none"]' ); ?>   	
-					<div class="auth-option text-center pt-5">
-						Already have an account? <a class="text-link" href="<?php echo home_url('/login'); ?>" >Log in</a>
-					</div>
+					<?php
+					if( is_user_logged_in() ){ echo do_shortcode( '[pms-register]' ); }
+					else {
+						echo do_shortcode( '[pms-register subscription_plans="none"]' ); 
+						?>						
+						<div class="auth-option text-center pt-5">
+							Already have an account? <a class="text-link" href="<?php echo home_url('/login'); ?>" >Log in</a>
+						</div>
+					<?php } ?>
 				</div>
 			</div>				
 			<footer class="app-auth-footer"></footer>			
