@@ -36,21 +36,32 @@ function person_search(){
 
 		$response['skip'] = $skip;
 
-		$wpdb->insert(
-			$wpdb->prefix . 'woo_wallet_transactions',
-			[
-				'blog_id' => 1,
-				'user_id' => $searchData['authorID'],
-				'type' => 'debit',
-				'amount' => $searchData['price'],
-				'balance' => $searchData['balance'] - $searchData['price'],
-				'currency' => 'USD',
-				'created_by' => $searchData['authorID'],
-				'date' => time()
-			]
-		);
+		if( $searchData['authorFreeSearches'] > 0 ){
 
-		$response['balance'] = $searchData['balance'] - $searchData['price'];
+			$newFreeSearchesBalance = $searchData['authorFreeSearches'] - 1;
+			update_user_meta( get_current_user_id() , 'free_searches_balance' , $newFreeSearchesBalance );
+			$personSearchResponse['freeSearchesBalance'] = $newFreeSearchesBalance;
+			$personSearchResponse['balance'] = $searchData['balance'];
+
+		} else {
+
+			$wpdb->insert(
+				$wpdb->prefix . 'woo_wallet_transactions',
+				[
+					'blog_id' => 1,
+					'user_id' => $searchData['authorID'],
+					'type' => 'debit',
+					'amount' => $searchData['price'],
+					'balance' => $searchData['balance'] - $searchData['price'],
+					'currency' => 'USD',
+					'created_by' => $searchData['authorID'],
+					'date' => time()
+				]
+			);
+
+			$response['balance'] = $searchData['balance'] - $searchData['price'];
+
+		}
 
 	}
 
@@ -76,8 +87,8 @@ function person_search(){
 				$names = $person['names'];
 				$name = $names[0];
 				update_post_meta( $personPost, 'input', serialize( $requestInput ) );
-				update_post_meta( $personPost, 'firstName', ucwords( strtolower( $searchData['firstName'] ) ) );
-				update_post_meta( $personPost, 'lastName', ucwords( strtolower( $searchData['lastName'] ) ) );
+				update_post_meta( $personPost, 'firstName', ucfirst( strtolower( $searchData['firstName'] ) ) );
+				update_post_meta( $personPost, 'lastName', ucfirst( strtolower( $searchData['lastName'] ) ) );
 				update_post_meta( $personPost, 'is_successful', 0 );
 				update_post_meta( $personPost, 'skipType', 'single' );
 			}
@@ -114,8 +125,8 @@ function person_search(){
 				$namesArray = [];   
 				foreach( $names as $name ) {
 					$nameRecord = [];
-					$nameRecord['firstName'] = ucwords( strtolower( $name->firstname ) );
-					$nameRecord['lastName'] = ucwords( strtolower( $name->lastname ) );
+					$nameRecord['firstName'] = ucfirst( strtolower( $name->firstname ) );
+					$nameRecord['lastName'] = ucfirst( strtolower( $name->lastname ) );
 					$nameRecord['age'] = $name->age;
 					switch ($name->deceased) {
 						case 'N':
@@ -158,8 +169,8 @@ function person_search(){
 				$addressesArray = [];
 				foreach ( $addresses as $address ) {
 					$addressRecord = [];
-					$addressRecord['street'] = ucwords( strtolower( $address->street ) );
-					$addressRecord['city'] = ucwords( strtolower( $address->city ) );
+					$addressRecord['street'] = ucfirst( strtolower( $address->street ) );
+					$addressRecord['city'] = ucfirst( strtolower( $address->city ) );
 					$addressRecord['state'] = strtoupper( $address->state );
 					$addressRecord['zip'] = $address->zip;
 	
@@ -172,7 +183,7 @@ function person_search(){
 				$relativesArray = [];
 				foreach ( $relatives as $relative ) {
 					$relativeRecord = [];
-					$relativeRecord['name'] = ucwords( strtolower( $relative->name ) );
+					$relativeRecord['name'] = ucfirst( strtolower( $relative->name ) );
 					$relativeRecord['age'] = $relative->age;
 					$phones = $relative->phones;
 					$phonesArray = [];
@@ -180,7 +191,7 @@ function person_search(){
 						$phoneRecord = [];
 						$phoneRecord['number'] = $phone->phonenumber;
 						if( $phone->phonetype ){
-							$phoneRecord['type'] = ucwords( strtolower( $phone->phonetype ) );
+							$phoneRecord['type'] = ucfirst( strtolower( $phone->phonetype ) );
 						}
 						array_push( $phonesArray , $phoneRecord );
 					}
@@ -209,8 +220,8 @@ function person_search(){
 					$names = $person['names'];
 					$name = $names[0];
 					update_post_meta( $personPost, 'input', serialize( $requestInput ) );
-					update_post_meta( $personPost, 'firstName', ucwords( strtolower( $name->firstname ) ) );
-					update_post_meta( $personPost, 'lastName', ucwords( strtolower( $name->lastname ) ) );
+					update_post_meta( $personPost, 'firstName', ucfirst( strtolower( $name->firstname ) ) );
+					update_post_meta( $personPost, 'lastName', ucfirst( strtolower( $name->lastname ) ) );
 					update_post_meta( $personPost, 'age', $name->age );
 					update_post_meta( $personPost, 'deceased', strtolower( $name->deceased ) );
 					if( sizeof( $names ) > 1 ){

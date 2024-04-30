@@ -17,6 +17,7 @@ $(skipSubmit).on( 'click' , function( e ){
 
     const formData = {
         authorID: $(form).find('#skip-author-id').val(),
+        authorFreeSearches: $(form).find('#author-free-searches').val(),
         authorPlan: $(form).find('#skip-author-plan').val(),
         firstName: $(form).find('#skip-first-name').val(),
         lastName: $(form).find('#skip-last-name').val(),
@@ -37,6 +38,8 @@ $(skipSubmit).on( 'click' , function( e ){
         nonce: 'nonce'
     }
 
+    console.log( data );
+
     $.post(
         //@ts-ignore
         ajaxObject.admin_ajax_url,
@@ -46,13 +49,18 @@ $(skipSubmit).on( 'click' , function( e ){
             const responseTrimmed = JSON.parse( response.slice( 0 , -1 ) );
             const responseStatus = responseTrimmed.status;
 
+            console.log( responseTrimmed );
+
             if( 'error' == responseStatus ){
                 console.log( responseTrimmed.errorMessage );
             } else if( 'success' == responseStatus ){
 
                 const balance = Math.round( responseTrimmed.balance * 100 ) / 100;
 
-                $('#current-balance').text( balance )
+                $('#current-balance').text( balance );
+                $('#free-searches-balance').text( responseTrimmed.freeSearchesBalance );
+                $('#front-page-free-searches-balance').text( responseTrimmed.freeSearchesBalance );
+                $('#front-page-free-searches-balance-2').text( responseTrimmed.freeSearchesBalance );
 
                 if( responseTrimmed.people.length <= 0 ){
                     $('#fast-skip-status').text('Error');
