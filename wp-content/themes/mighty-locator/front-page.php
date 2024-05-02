@@ -127,12 +127,12 @@ if( !get_user_meta( get_current_user_id(), 'free_searches_assigned', true ) ){
 											target="_blank"
 											id="free-searches-subscribe-to-youtube"
 											current-user="<?php echo get_current_user_id(); ?>"
-											href="https://youtube.com"
+											href="https://www.youtube.com/@mightyprocess"
 										>
 											<div class="betaProgress__icon"></div>
 											<div class="betaProgress__content">
 												<p class="betaProgress__text">Subscribe to our Youtube Channel</p>
-												<p class="betaProgress__text betaProgress__text_small">Click on the link to view our Facebook community and learn more about all the updates and resources we offer.</p>
+												<p class="betaProgress__text betaProgress__text_small">Click here to subscribe.</p>
 											</div>
 										</a>
 										<a
@@ -146,12 +146,12 @@ if( !get_user_meta( get_current_user_id(), 'free_searches_assigned', true ) ){
 											target="_blank"
 											id="free-searches-subscribe-to-facebook"
 											current-user="<?php echo get_current_user_id(); ?>"
-											href="https://facebook.com"
+											href="https://www.skool.com/maa"
 										>
 											<div class="betaProgress__icon"></div>
 											<div class="betaProgress__content">
-												<p class="betaProgress__text">Join our Facebook group</p>
-												<p class="betaProgress__text betaProgress__text_small">Click on the link to view our Facebook community and learn more about all the updates and resources we offer.</p>
+												<p class="betaProgress__text">Join our Private Community of Legal Support Professionals.</p>
+												<p class="betaProgress__text betaProgress__text_small">Click Here To Join</p>
 											</div>
 										</a>
 									</div>
