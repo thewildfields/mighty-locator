@@ -100,11 +100,13 @@ function person_search(){
 			){
 
 				$personSearchResponse['status'] = 'error';
+				$personSearchResponse['skipData'] = $searchData;
 				$personSearchResponse['errorMessage'] = 'Person Not Found with this name and address combination. Do you want to retry the search without the address?';
 				print_r( json_encode( $personSearchResponse ) );
 				return;
 			} else {
 				$personSearchResponse['status'] = 'error';
+				$personSearchResponse['skipData'] = $searchData;
 				$personSearchResponse['errorMessage'] = 'Person Not Found';
 				print_r( json_encode( $personSearchResponse ) );
 				return;

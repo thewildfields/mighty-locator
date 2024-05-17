@@ -8,7 +8,7 @@ module.exports = {
       }),
     ],
     entry: {
-      skip: './assets/src/skip.ts',
+      skip: './assets/src/skip.js',
     },    
     output: {
         path: path.resolve( __dirname, 'assets/dist' ),
