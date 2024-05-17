@@ -18,20 +18,12 @@ if( have_posts() ) : while( have_posts( ) ) : the_post();
 
 <div class="app-wrapper">
 	<div class="app-content pt-3 p-md-3 p-lg-4">
-		<div class="container-xl">
-
-			<?php
-			the_content();
-			echo '<pre>';
-			print_r( get_post_meta( get_the_ID() ) );
-			echo '</pre>';
-			?>
-			
+		<div class="container-xl">			
 						
 			<div class="row g-4 mb-4">
 				
 				<div class="col-12">
-					<?php echo get_template_part( 'templates/person-search' , 'result' ); ?>
+					<?php echo get_template_part( 'templates/person-search' , 'result-single' ); ?>
 				</div>
 				
 			</div>

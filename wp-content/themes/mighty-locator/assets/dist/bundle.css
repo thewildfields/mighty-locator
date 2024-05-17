@@ -73,6 +73,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  line-height: 1.5 !important;
+}
+
 .ml {
   background-color: rgb(245, 246, 254);
   font-family: "Roboto", sans-serif;
@@ -383,4 +387,45 @@ a,
   padding: 10px;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   background-color: white;
+}
+
+.post-list .single-post,
+.sidebar .single-slidebar {
+  background-color: white !important;
+  border-radius: 4px !important;
+}
+
+.post-list .single-post {
+  display: grid !important;
+  gap: 30px;
+  grid-template-columns: 200px auto;
+}
+
+.sidebar .single-slidebar .cat-list li {
+  background-color: #f5f6fe;
+}
+.sidebar .single-slidebar .cat-list li:hover a {
+  color: white !important;
+}
+
+.post-list .single-post .address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.single-post .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px !important;
+}
+.single-post .tags li {
+  margin-bottom: 0 !important;
+}
+
+.single-post .thumb img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }

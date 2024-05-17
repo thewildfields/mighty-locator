@@ -24,16 +24,8 @@
 </head>
 
 <body class="ml app">
-	<div class="container container_wide">
-		<header class="ml_card ml_header">
-			<div class="colGr">
-				<div class="colGr__col_6"></div>
-				<div class="colGr__col_6"></div>
-			</div>
-		</header>
-	</div>
 
-    <header class="app-header fixed-top header" style="display: none">	 
+    <header class="app-header fixed-top header">	 
 
         <div class="app-header-inner">  
 	        <div class="container-fluid py-2">
@@ -65,7 +57,7 @@
 								</div>
 							</a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="<?php echo home_url( '/account' ); ?>">Profile</a></li>
+								<li><a class="dropdown-item" href="<?php echo home_url( '/account/profile' ); ?>">Profile</a></li>
 								<?php if( current_user_can( 'administrator' ) ) { ?>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" href="<?php echo get_admin_url(); ?>">WordPress Dashboard</a></li>

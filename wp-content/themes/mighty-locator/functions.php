@@ -17,20 +17,36 @@ function ___mlt__frontend_assets(){
             $media = 'all'
         );
 
-        wp_enqueue_style(
-            $handle = 'mighty-locator-theme-frontend',
-            $src = get_theme_file_uri( 'assets/dist/bundle.css' ),
-            $deps = null,
-            $ver = null,
-            $media = 'all'
-        );
-
         wp_enqueue_script(
             $handle = 'mighty-locator-theme-frontend',
             $src = get_theme_file_uri( 'assets/dist/frontend.js' ),
             $deps = ['jquery'],
             $ver = null,
             $in_footer = true
+        );
+
+        wp_enqueue_style(
+            $handle = 'mighty-locator-listings',
+            $src = get_theme_file_uri( 'assets/css/listings-main.css' ),
+            $deps = null,
+            $ver = null,
+            $media = 'all'
+        );
+
+        wp_enqueue_style(
+            $handle = 'mighty-locator-linear-icons',
+            $src = get_theme_file_uri( 'assets/css/linearicons.css' ),
+            $deps = null,
+            $ver = null,
+            $media = 'all'
+        );
+
+        wp_enqueue_style(
+            $handle = 'mighty-locator-theme-frontend',
+            $src = get_theme_file_uri( 'assets/dist/bundle.css' ),
+            $deps = null,
+            $ver = null,
+            $media = 'all'
         );
 
     }
