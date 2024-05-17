@@ -7,11 +7,13 @@ $relatives = unserialize( scf('relatives') );
 
 ?>
 
-<div class="card">
+<div id="peopleCards"></div>
+
+<!-- <div class="card">
 
     <div class="card__header">
         <div class="container card__container">
-            <h1 class="card__title card__title_big" fast-search-data="name"><?php echo scf('firstName') . ' ' . scf('lastName'); ?></h1>
+            <h2 class="card__title card__title_big" fast-search-data="name"><?php echo scf('firstName') . ' ' . scf('lastName'); ?></h2>
             <div class="card__label"></div>
         </div>
     </div>
@@ -89,4 +91,4 @@ $relatives = unserialize( scf('relatives') );
 
     <div class="card__footer"></div>
 
-</div>
+</div> -->

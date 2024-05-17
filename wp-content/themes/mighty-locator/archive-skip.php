@@ -27,7 +27,8 @@
 								
 									$skipsArchiveForUserArgs = array(
 										'post_type' => 'skip',
-										'author' => get_current_user_id()
+										'author' => get_current_user_id(),
+										'posts_per_page' => -1
 									);
 									$skipsArchiveForUser = new WP_Query( $skipsArchiveForUserArgs );
 									if( $skipsArchiveForUser->have_posts() ) : while( $skipsArchiveForUser->have_posts() ) : $skipsArchiveForUser->the_post();
@@ -38,11 +39,7 @@
 										<td class="cell"><?php echo get_current_user_id() . '-' . get_the_ID(); ?></td>
 										<td class="cell"><span><?php the_title(); ?></span></td>
 										<td class="cell"><span><?php the_time('M j'); ?></span><span class="note"><?php the_time(); ?></span></td>
-										<?php if ( get_post_meta( get_the_ID() , 'is_successfull' , true ) ){ ?>
 										<td class="cell"><span class="badge bg-info">Success</span></td>
-										<?php } else { ?>
-										<td class="cell"><span class="badge bg-danger">Error</span></td>
-										<?php } ?>
 										<td class="cell">$1.99</td>
 										<td class="cell"><a class="btn-sm app-btn-secondary" href="<?php the_permalink(); ?>">View</a></td>
 									</tr>

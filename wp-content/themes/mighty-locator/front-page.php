@@ -325,6 +325,9 @@ if( !get_user_meta( get_current_user_id(), 'free_searches_assigned', true ) ){
 											<div class="col-12 pt-4" id="fast-skip-result" style="max-height: 0; opacity: 0;">
 												<?php echo get_template_part( 'templates/person-search' , 'result' ); ?>
 											</div>
+											<div class="col-12 pt-4" id="fast-skip-error" style="max-height: 0; opacity: 0;">
+												<?php echo get_template_part( 'templates/person-search' , 'error' ); ?>
+											</div>
 									</row>
 								</div>
 							</div>
