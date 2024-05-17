@@ -139,14 +139,5 @@
             "fontFamily": "var(--wp--preset--font-family--roboto)",
             "fontWeight": "400"
         }
-    },
-	"customTemplates": {},
-	"templateParts": [
-        {
-            "area": "header",
-            "name": "header-signed-in",
-            "title": "Header - Signed-in"
-        }
-    ],
-	"patterns": []
+    }
 }
