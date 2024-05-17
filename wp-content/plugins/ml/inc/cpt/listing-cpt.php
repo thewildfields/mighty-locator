@@ -18,9 +18,9 @@ function ___mlp__register_listings_cpt(){
 		'menu_position'       => 15,
 		'menu_icon'           => null,
         'hierarchical'        => false,
-		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => [],
-		'has_archive'         => false,
+		'supports'            => [ 'title', 'editor', 'thumbnail' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['post_tag'],
+		'has_archive'         => true,
 		'rewrite'             => true,
 		'query_var'           => true,
 	] );
