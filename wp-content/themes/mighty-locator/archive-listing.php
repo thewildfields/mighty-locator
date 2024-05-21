@@ -51,8 +51,7 @@ get_header();
 									<div class="details">
 										<div class="title d-flex flex-row justify-content-between">
 											<div class="titles">
-												<input class="common-input form-control" type="text" name="post-name" placeholder="Listing name" id="">
-												<h6><?php?></h6>					
+												<input class="common-input form-control" type="text" name="post-name" placeholder="Listing name" id="">				
 											</div>
 										</div>
 										<div>
