@@ -7,7 +7,7 @@
 .post-list .single-post{
     display: grid!important;
     gap: 30px;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 100px auto;
 }
 
 .sidebar .single-slidebar .cat-list li{
@@ -40,7 +40,15 @@
 
 .single-post .thumb img{
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
+}
+
+textarea{
+    resize: none!important;
+}
+
+.common-input, .common-textarea{
+    margin-bottom: 20px;
 }
