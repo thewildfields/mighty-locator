@@ -5,8 +5,6 @@ const accountNavLinks = $(accountNav).find('li');
 const walletAccountLink = $('.woocommerce-MyAccount-navigation-link--woo-wallet');
 $(walletAccountLink).addClass('pms-account-navigation-link');
 
-console.log( walletAccountLink );
-
 $(accountNavLinks[2]).after(walletAccountLink);
 
 const subtoyt = $('#free-searches-subscribe-to-youtube');
@@ -34,3 +32,12 @@ $(subtofb).on( 'click' , function(){
         data
     )
 })
+
+const newAccountNavLinks = document.querySelectorAll('.accountNav__link');
+
+for (let i = 0; i < newAccountNavLinks.length; i++) {
+    const link = newAccountNavLinks[i];
+    if( link.getAttribute('href') + '/' == window.location.href ){
+        link.classList.add('accountNav__link_current');
+    }
+}

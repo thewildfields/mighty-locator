@@ -1,10 +1,10 @@
-.post-list .single-post,
+.single-post,
 .sidebar .single-slidebar{
     background-color: white!important;
     border-radius: 4px!important;
 }
 
-.post-list .single-post{
+.single-post{
     display: grid!important;
     gap: 30px;
     grid-template-columns: 100px auto;
@@ -20,11 +20,21 @@
         }
     }
 }
-
-.post-list .single-post .address{
+.single-post .address{
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.addListing{
+
+    display: grid!important;
+    gap: 30px;
+    grid-template-columns: 100px auto;
+
+    input, textarea{
+        font-size: 1rem!important;
+    }
 }
 
 .single-post .tags{

@@ -1,0 +1,30 @@
+.accountNav{
+
+    &__item{
+        margin-bottom: 16px;
+    }
+
+    &__link{
+
+        color: black!important;
+        font-weight: 400;
+        display: block;
+        font-size: 22px;
+
+        &:hover,
+        &:not(:hover){
+            transition: all 0.3s ease;
+        }
+
+        &:hover{
+            padding-left: 10px;
+        }
+
+        &_current{
+            padding-left: 10px;
+        }
+
+
+    }
+
+}
