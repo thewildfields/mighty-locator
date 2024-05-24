@@ -30,10 +30,6 @@
 .woo-wallet-sidebar{
 
     .card{
-
-        &:nth-child(2){
-            display: none;
-        }
         
     }
 
@@ -57,4 +53,8 @@
 
 .pms-account-navigation{
     display: none!important;
+}
+
+.woocommerce-MyAccount-navigation{
+    display: none;
 }
