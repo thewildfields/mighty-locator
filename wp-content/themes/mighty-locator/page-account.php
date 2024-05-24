@@ -28,6 +28,9 @@ get_header(); ?>
 									<a href="<?php echo home_url('/account/subscriptions'); ?>" class="accountNav__link">Subscriptions</a>
 								</li>
 								<li class="accountNav__item">
+									<a href="<?php echo home_url('/my-account/my-wallet/add'); ?>" class="accountNav__link">Recharge Wallet</a>
+								</li>
+								<li class="accountNav__item">
 									<a href="<?php echo home_url('/add-listing'); ?>" class="accountNav__link">Your Listing</a>
 								</li>
 							</ul>
