@@ -8,21 +8,36 @@ $listingByAuthor = get_posts('post_type=listing&author='.get_current_user_id() )
 
 $canCreateListing = sizeof( $listingByAuthor ) === 0 ? true : false;
 
-if( isset( $_POST ) && !empty( $_POST ) && $canCreateListing ){
-	wp_insert_post(
-		wp_slash(
-			[
-				'post_type' => 'listing',
-				'author' => get_current_user_id(),
-				'post_title' => $_POST['post-name'],
-				'post_content' => $_POST['post-content'],
-				'post_status' => 'publish',
-				'meta_input' => [
-					'price_range' => $_POST['listing-price']
+if( isset( $_POST ) && !empty( $_POST ) ){
+	if ( $canCreateListing ){
+		wp_insert_post(
+			wp_slash(
+				[
+					'post_type' => 'listing',
+					'author' => get_current_user_id(),
+					'post_title' => $_POST['post-name'],
+					'post_content' => $_POST['post-content'],
+					'post_status' => 'publish',
+					'meta_input' => [
+						'price_range' => $_POST['listing-price']
+					]
 				]
-			]
-		)
-	);
+			)
+		);
+	} else {
+		wp_update_post(
+			wp_slash(
+				[
+					'ID' => $_POST['listing-post-id'],
+					'post_title' => $_POST['post-name'],
+					'post_content' => $_POST['post-content'],
+					'meta_input' => [
+						'price_range' => $_POST['listing-price']
+					]
+				]
+			)
+		);
+	}
 }
 
 get_header();
@@ -84,9 +99,6 @@ get_header();
 											<textarea class="common-input form-control" name="post-content" name="listing-content"></textarea>
 										</div>
 										<p class="address">
-											<input class="common-input form-control" type="text" name="listing-counties" placeholder="List counties where you provide services" required>
-										</p>
-										<p class="address">
 											<input class="common-input form-control" type="text" name="listing-price" placeholder="Price or Price range" required>
 										</p>
 										<input type="submit" value="Submit" class="btn app-btn-primary w-100 theme-btn mx-auto button_info">
@@ -94,10 +106,19 @@ get_header();
 								</form>
 							<?php } else {
 
-								foreach ($listingByAuthor as $listing) {
-									setup_postdata( $listing );
+								$postsQueryData = array(
+									'post_type' => 'listing',
+									'author' => get_current_user_id(),
+									'posts_per_page' => 1
+								);
+
+								$postsQuery = new WP_Query( $postsQueryData );
+
+								if( $postsQuery->have_posts() ) : while( $postsQuery->have_posts() ) : $postsQuery->the_post();
+
 								?>
 								<form class="single-post form-area addListing" method="POST" action="#">
+									<input type="hidden" name="listing-post-id" value="<?php echo get_the_ID(); ?>">
 									<div class="thumb">
 											<img src="<?php echo get_avatar_url( get_current_user_id() ); ?>" alt="">
 									</div>
@@ -110,10 +131,13 @@ get_header();
 										<div>
 											<textarea class="common-input form-control" name="post-content" name="listing-content"><?php echo esc_html( get_the_content() ); ?></textarea>
 										</div>
+										<p class="address">
+											<input class="common-input form-control" type="text" name="listing-price" placeholder="Price or Price range" value="<?php the_field('price_range'); ?>" required>
+										</p>
 										<input type="submit" value="Update" class="btn app-btn-primary w-100 theme-btn mx-auto button_info">
 									</div>
 								</form>
-							<?php } } ?>
+							<?php endwhile; wp_reset_postdata(); endif; } ?>
 						</div>
 					</div>
 				</div>
