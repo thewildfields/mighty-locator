@@ -212,7 +212,7 @@ if( !get_user_meta( get_current_user_id(), 'free_searches_assigned', true ) ){
 									Recharge wallet
 								</div>
 							</div>
-							<a class="app-card-link-mask" href="<?php echo home_url( '/my-account/woo-wallet/add' ); ?>"></a>
+							<a class="app-card-link-mask" href="<?php echo home_url( '/my-account/my-wallet/add' ); ?>"></a>
 						</div>
 					</div>
 
