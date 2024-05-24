@@ -68,7 +68,9 @@ get_header();
 
 								}; 
 							
-							if( have_posts() ) : while( have_posts() ) : the_post(); ?>
+							if( have_posts() ) : while( have_posts() ) : the_post();
+							
+							?>
                                 <div class="single-post d-flex flex-row">
                                     <div class="thumb">
 										<?php if( get_the_post_thumbnail() ) { ?>
@@ -84,7 +86,10 @@ get_header();
                                                 <h6><?php the_author(); ?></h6>					
                                             </div>
                                             <ul class="btns">
-                                                <li><a>Contact</a></li>
+												<?php if( get_the_author_meta( 'ID' ) == get_current_user_id() ) { ?>
+													<li><a href="<?php echo home_url('/add-listing'); ?>" target="_blank">Edit Listing</a></li>
+												<?php } ?>
+                                                <li><a href="mailto:<?php echo get_the_author_meta('user_email'); ?>" target="_blank">Contact</a></li>
                                             </ul>
                                         </div>
 										<div><?php the_content(); ?></div>

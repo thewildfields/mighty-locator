@@ -175,7 +175,7 @@ if( !get_user_meta( get_current_user_id(), 'free_searches_assigned', true ) ){
 						<div class="app-card-header p-3">
 							<div class="row justify-content-between align-items-center">
 								<div class="col-auto">
-									<h4 class="app-card-title">Congratulations!</h4>
+									<h4 class="app-card-title">Congratulations! You got free searches.</h4>
 								</div>
 							</div>
 						</div>

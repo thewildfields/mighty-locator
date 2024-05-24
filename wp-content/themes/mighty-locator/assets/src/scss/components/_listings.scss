@@ -37,6 +37,33 @@
     }
 }
 
+.post-list .single-post .btns{
+
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    
+    li{
+
+        padding: 0;
+        display: block;
+
+        &:hover{
+            background-color: $mightyBlue;
+            a{
+                color: white!important;
+            }
+        }
+
+        a{
+            padding: 10px 15px;
+            display: block;
+        }
+    }
+
+}
+
+
 .single-post .tags{
 
     display: flex;
