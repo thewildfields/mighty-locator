@@ -44,7 +44,7 @@ if( pms_is_member( get_current_user_id() ) ){
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-last-name">Last Name</label>
-                <input id="skip-last-name" name="skip-last-name" type="number" min="1" max="100" class="form-control skip-last-name" placeholder="last Name" required>
+                <input id="skip-last-name" name="skip-last-name" type="text" min="1" max="100" class="form-control skip-last-name" placeholder="Last Name" required>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-min-age">Minimum Age</label>
@@ -52,7 +52,7 @@ if( pms_is_member( get_current_user_id() ) ){
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-max-age">Maximum Age</label>
-                <input id="skip-max-age" name="skip-max-age" type="text" class="form-control skip-max-age" placeholder="Maximum Age" required>
+                <input id="skip-max-age" name="skip-max-age" type="number" class="form-control skip-max-age" placeholder="Maximum Age" required>
             </div>
             <div class="col-md-12 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-street-address">Street Address</label>
