@@ -23,15 +23,33 @@ const createCardSection = ( label , title , elements ) => {
 
 $(skipSubmit).on( 'click' , function( e ){
 
+    $('.loader').show();
+    $('#peopleCards').html('');
+    $('#fast-skip-error').animate({
+        maxHeight: 0,
+        opacity: 0
+    }, 300)
+    $('#fast-skip-result').animate({
+        maxHeight: 0,
+        opacity: 0
+    }, 300)
+    
     e.preventDefault();
     e.stopPropagation();
 
+
+
     const form = $(this).closest('.skipForm');
 
-    let relatives = $(form).find('#skip-relatives').val().split(',');
+    let relatives = null
 
-    for (let i = 0; i < relatives.length; i++) {
-        relatives[i] = relatives[i].trim();        
+    if( $(form).find('#skip-relatives').val().length > 0 ){
+
+        relatives = $(form).find('#skip-relatives').val().split(',');
+    
+        for (let i = 0; i < relatives.length; i++) {
+            relatives[i] = relatives[i].trim();        
+        }
     }
 
     const formData = {
@@ -64,13 +82,23 @@ $(skipSubmit).on( 'click' , function( e ){
         function( response ){
             
             const responseTrimmed = JSON.parse( response.slice( 0 , -1 ) );
+
+            console.log( responseTrimmed );
+
             const responseStatus = responseTrimmed.status;
 
+            $('.loader').hide();
+
             if( 'error' == responseStatus ){
+                console.log( responseStatus );
                 $('#error-text').text( responseTrimmed.errorMessage );
-                $('[fast-search-data="name"]').text( `${responseTrimmed.skipData.firstName} ${responseTrimmed.skipData.lastName}` );
+                $('[fast-search-data="name"]').text( `${responseTrimmed.firstName} ${responseTrimmed.lastName}` );
 
                 $('#fast-skip-error').animate({
+                    maxHeight: 50000,
+                    opacity: 1
+                }, 300)
+                $('#fast-skip-result').animate({
                     maxHeight: 50000,
                     opacity: 1
                 }, 300)
@@ -95,69 +123,44 @@ $(skipSubmit).on( 'click' , function( e ){
                     $('#fast-skip-status').removeClass('bg-danger');
                     $('#fast-skip-status').text('Successfull');
 
-                    const totalResultsFonund = responseTrimmed.people.length;
-
                     responseTrimmed.people.forEach(contact => {
 
                         const personCard = document.createElement('div');
                         personCard.classList.add('card');
 
-                        const personCardHeader = `<div class="card__header"><div class="container card__container"><h2 class="card__title card__title_big" fast-search-data="name">${contact.names[0].firstname} ${contact.names[0].lastname}</h2></div></div>`;
+                        const personCardHeader = `<div class="card__header"><div class="container card__container"><h2 class="card__title card__title_big" fast-search-data="name">${contact.firstName} ${contact.lastName}</h2></div></div>`;
 
                         const personCardBody = document.createElement('div');
                         personCardBody.classList.add('card__body');
 
-                        let contactPhones = [];
-                        contact.phones.forEach( phone => {
-                            const phoneElement = document.createElement('p');
-                            phoneElement.classList.add('cardSection__contentItem','cardSection__contentItem_phone');
-                            const phoneElementHTML = `<a href="tel:${phone.number}">${phone.number}</a>`;
-                            phoneElement.innerHTML = phoneElementHTML;
-                            contactPhones.push( phoneElement );
-                        });
+                        let contactPhones = [ ];
+                        const phoneElement = document.createElement('p');
+                        phoneElement.classList.add('cardSection__contentItem','cardSection__contentItem_phone');
+                        const phoneElementHTML = `<a href="tel:${contact.phone}">${contact.phone}</a>`;
+                        phoneElement.innerHTML = phoneElementHTML;
+                        contactPhones.push( phoneElement );
                         const phoneSection = createCardSection( 'Phones' , 'phones' , contactPhones );
 
                         let emails = [];
-                        contact.emails.forEach( email => {
-                            const emailElement = document.createElement('p');
-                            emailElement.classList.add('cardSection__contentItem','cardSection__contentItem_email');
-                            const emailElementHTML = `<a href="mailto:${email}">${email}</a>`;
-                            emailElement.innerHTML = emailElementHTML;
-                            emails.push( emailElement );
-                        });
+                        const emailElement = document.createElement('p');
+                        emailElement.classList.add('cardSection__contentItem','cardSection__contentItem_email');
+                        const emailElementHTML = `<a href="mailto:${contact.email}">${contact.email}</a>`;
+                        emailElement.innerHTML = emailElementHTML;
+                        emails.push( emailElement );
                         const emailsSection = createCardSection( 'Emails' , 'emails' , emails );
 
                         let addresses = [];
-                        contact.addresses.forEach( address => {
-                            const addressElement = document.createElement('p');
-                            addressElement.classList.add('cardSection__contentItem','cardSection__contentItem_address');
-                            const addressElementHTML = `${address.street}, ${address.city}, ${address.state} ${address.zip}`;
-                            addressElement.innerHTML = addressElementHTML;
-                            addresses.push( addressElement );
-                        });
+                        const addressElement = document.createElement('p');
+                        addressElement.classList.add('cardSection__contentItem','cardSection__contentItem_address');
+                        const addressElementHTML = `${contact.address}, ${contact.city}, ${contact.state} ${contact.zip}`;
+                        addressElement.innerHTML = addressElementHTML;
+                        addresses.push( addressElement );
                         const addressesSection = createCardSection( 'Addresses' , 'addresses' , addresses );
-
-                        let relatives = [];
-                        contact.relatives.forEach( relative => {
-                            const relativeElement = document.createElement('p');
-                            relativeElement.classList.add('cardSection__contentItem','cardSection__contentItem_relative');
-                            let relativeElementHTML = `${relative.name} (${relative.age})`;
-                            if( relative.phones ){
-                                relativeElementHTML += '<br>';
-                                relative.phones.forEach( phone => {
-                                    relativeElementHTML += `<p><a href="tel:${phone.number}">${phone.number}</a></p>`
-                                })
-                            }
-                            relativeElement.innerHTML = relativeElementHTML;
-                            relatives.push( relativeElement );
-                        });
-                        const relativesSection = createCardSection( 'Relatives' , 'relatives' , relatives );
 
 
                         personCardBody.append( phoneSection );
                         personCardBody.append( emailsSection );
                         personCardBody.append( addressesSection );
-                        personCardBody.append( relativesSection );
                         
                         personCard.innerHTML += personCardHeader;
                         personCard.append( personCardBody );

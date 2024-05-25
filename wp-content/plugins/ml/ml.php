@@ -67,18 +67,17 @@ add_action( 'wp_ajax_nopriv_single_skip' , 'person_search');
 function batchSkip( $skipData ) {
 
 	$skip = wp_remote_post(
-		$url = 'https://app.directskip.com/apiv2/search_contact.php',
+		$url = 'https://api.openpeoplesearch.com/api/v1/Consumer/NameSearch',
 		$args = array(
 			'timeout' => 300,
 			'headers' => array(
 				'Accept: application/json',
-				'Content-Type: application/json'
+				'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ijc1NTMiLCJyb2xlIjoidXNlciIsIm5iZiI6MTcxNjMxNzQzNCwiZXhwIjoxNzE2OTIyMjM0LCJpYXQiOjE3MTYzMTc0MzR9.Ib0XX62LDxTLTg_MLuhQVVxbceN5ybCBJ1W83Xw7mFE'
 			),
 			'body' => json_encode(
 				array(
-					'api_key'			=> 'h6m8LA8YBUib2uTWZuUp65d869bb0dc69xissI',
-					'last_name'			=> $skipData['lastName'],
-					'first_name'		=> $skipData['firstName'],
+					'lastName'			=> $skipData['lastName'],
+					'firstName'		=> $skipData['firstName'],
 					'authorPlan'		=> $skipData['authorPlan'],
 					'mailing_address'	=> $skipData["streetAddress"],
 					'mailing_city'		=> $skipData["city"],
@@ -91,30 +90,32 @@ function batchSkip( $skipData ) {
 
 	if( !is_wp_error( $skip ) ){
 
-		$payload = $skip['body'];
+		// $payload = $skip['body'];
 
-		// $skipContacts = $skipBody->contacts;
+		// // $skipContacts = $skipBody->contacts;
 
-		$skipPost = wp_insert_post(
-			$postarr = wp_slash(
-				array(
-					'post_type' => 'skip',
-					'post_status' => 'publish',
-					'author' => $skipData['authorID'],
-					'post_title' => $skipData['firstName'] . ' ' . $skipData['lastName'],
-					'post_content' => $payload,
-					'meta_input' => array(
-						'skip_type' => 'Single'
-					)
-				)
-			)
-		);
+		// $skipPost = wp_insert_post(
+		// 	$postarr = wp_slash(
+		// 		array(
+		// 			'post_type' => 'skip',
+		// 			'post_status' => 'publish',
+		// 			'author' => $skipData['authorID'],
+		// 			'post_title' => $skipData['firstName'] . ' ' . $skipData['lastName'],
+		// 			'post_content' => $payload,
+		// 			'meta_input' => array(
+		// 				'skip_type' => 'Single'
+		// 			)
+		// 		)
+		// 	)
+		// );
 
-		if( !is_wp_error( $skipPost ) ){
+		// if( !is_wp_error( $skipPost ) ){
 
-			return $skipPost;
+		// 	return $skipPost;
 
-		}
+		// }
+
+		return json_encode( $skip );
 
 	}
 
