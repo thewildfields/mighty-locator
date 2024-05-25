@@ -7,6 +7,9 @@ $relatives = unserialize( scf('relatives') );
 
 ?>
 
+<div class="col-12 pt-4" id="fast-skip-error" style="max-height: 0; opacity: 0;">
+    <?php echo get_template_part( 'templates/person-search' , 'error' ); ?>
+</div>
 <div id="peopleCards"></div>
 
 <!-- <div class="card">

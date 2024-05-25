@@ -40,11 +40,11 @@ if( pms_is_member( get_current_user_id() ) ){
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-first-name">First Name</label>
-                <input id="skip-first-name" name="skip-first-name" type="text" class="form-control skip-first-name" placeholder="First Name">
+                <input id="skip-first-name" name="skip-first-name" type="text" class="form-control skip-first-name" placeholder="First Name" required>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-last-name">Last Name</label>
-                <input id="skip-last-name" name="skip-last-name" type="text" class="form-control skip-last-name" placeholder="last Name">
+                <input id="skip-last-name" name="skip-last-name" type="text" class="form-control skip-last-name" placeholder="last Name" required>
             </div>
             <div class="col-md-12 col-sm-12 mb-3">
                 <label class="sr-only" for="skip-street-address">Street Address</label>
@@ -114,4 +114,7 @@ if( pms_is_member( get_current_user_id() ) ){
             <a class="btn app-btn-secondary" href="<?php echo home_url('/skips-archive'); ?>">My searches archive</a>
         </div>
     </div>
+</div>
+<div class="col-12">
+    <div class="loader"></div>
 </div>
