@@ -120,12 +120,16 @@ function person_search(){
 			$personSearchResponse['errorMessage'] = 'Nothing was found';
 			print_r( json_encode( $personSearchResponse ) );
 			return;
-		} else if( $responseContactsCount > 10) {
-			$personSearchResponse['status'] = 'error';
-			$personSearchResponse['errorMessage'] = 'More than 10 entries was found for your search. Try adding additional parameters to narrow down the result.';
-			print_r( json_encode( $personSearchResponse ) );
-			return;
+		// } else if( $responseContactsCount > 10) {
+			// $personSearchResponse['status'] = 'error';
+			// $personSearchResponse['errorMessage'] = 'More than 10 entries was found for your search. Try adding additional parameters to narrow down the result.';
+			// print_r( json_encode( $personSearchResponse ) );
+			// return;
 		} else {
+
+			// if( $responseContactsCount > 10 ){
+			// 	$responseContacts = array_slice( $responseContacts , 0 , 10 );
+			// }
 			
 			$personSearchResponse['status'] = 'success';
 			$personSearchResponse['successMessage'] = $responseContactsCount == 1 ? 'A person was found' : $responseContactsCount . ' people were found';
