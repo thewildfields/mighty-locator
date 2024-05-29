@@ -136,35 +136,57 @@ function person_search(){
 
 			$people = $responseContacts;
 
-			foreach ($people as $person) {
-				$personPost = wp_insert_post(
-					$postarr = wp_slash(
-						array(
-							'post_type' => 'skip',
-							'post_status' => 'publish',
-							'author' => $searchData['authorID'],
-							'post_title' => $searchData['firstName'] . ' ' . $searchData['lastName'],
-						)
-					)
-				);
+			// foreach ($people as $person) {
 
-				if( !is_wp_error( $personPost ) ){
-					update_post_meta( $personPost, 'input', serialize( $requestInput ) );
-					update_post_meta( $personPost, 'firstName', ucfirst( strtolower( $person->firstName ) ) );
-					update_post_meta( $personPost, 'lastName', ucfirst( strtolower( $person->lastName ) ) );
-					// update_post_meta( $personPost, 'age', $name->age );
-					// update_post_meta( $personPost, 'deceased', strtolower( $name->deceased ) );
-					// if( sizeof( $names ) > 1 ){
-					// 	update_post_meta( $personPost, 'multipleNames', serialize( $person['names'] ) );
-					// }
-					update_post_meta( $personPost, 'phone', serialize( $person->phone ) );
-					update_post_meta( $personPost, 'email', serialize( $person->email ) );
-					update_post_meta( $personPost, 'address', serialize(
-						$person->address.', '.$person->city.', '.$person->state.' '.$person->zip
-					) );
-					// update_post_meta( $personPost, 'relatives', serialize( $person['relatives'] ) );
-					update_post_meta( $personPost, 'is_successful', 1 );
-					update_post_meta( $personPost, 'skipType', 'single' );
+			// 	$personPost = wp_insert_post(
+			// 		$postarr = wp_slash(
+			// 			array(
+			// 				'post_type' => 'skip',
+			// 				'post_status' => 'publish',
+			// 				'author' => $searchData['authorID'],
+			// 				'post_title' => $searchData['firstName'] . ' ' . $searchData['lastName'],
+			// 			)
+			// 		)
+			// 	);
+
+			// 	if( !is_wp_error( $personPost ) ){
+			// 		update_post_meta( $personPost, 'input', serialize( $requestInput ) );
+			// 		update_post_meta( $personPost, 'firstName', ucfirst( strtolower( $person->firstName ) ) );
+			// 		update_post_meta( $personPost, 'lastName', ucfirst( strtolower( $person->lastName ) ) );
+			// 		// update_post_meta( $personPost, 'age', $name->age );
+			// 		// update_post_meta( $personPost, 'deceased', strtolower( $name->deceased ) );
+			// 		// if( sizeof( $names ) > 1 ){
+			// 		// 	update_post_meta( $personPost, 'multipleNames', serialize( $person['names'] ) );
+			// 		// }
+			// 		update_post_meta( $personPost, 'phone', serialize( $person->phone ) );
+			// 		update_post_meta( $personPost, 'email', serialize( $person->email ) );
+			// 		update_post_meta( $personPost, 'address', serialize(
+			// 			$person->address.', '.$person->city.', '.$person->state.' '.$person->zip
+			// 		) );
+			// 		// update_post_meta( $personPost, 'relatives', serialize( $person['relatives'] ) );
+			// 		update_post_meta( $personPost, 'is_successful', 1 );
+			// 		update_post_meta( $personPost, 'skipType', 'single' );
+			// 	}
+			// }
+
+			$allAddresses = [];
+
+			foreach ($responseContacts as $person) {
+				$fullAddress =
+					ucwords(strtolower($person->address)).', '.
+					ucwords(strtolower($person->city)).', '.
+					strtoupper($person->state).' '.
+					ucwords(strtolower($person->zip));
+				$adressExists = false;
+				foreach ( $allAddresses as $savedAddress ) {
+					if( strtolower( $savedAddress ) == strtolower( $fullAddress ) ){
+						$adressExists = true;
+						break;
+					}
+				}
+
+				if( !$adressExists ){
+					array_push( $allAddresses, $fullAddress );
 				}
 			}
 
@@ -208,6 +230,8 @@ function person_search(){
 
 				}
 			}
+
+			$personSearchResponse['addresses'] = $allAddresses;
 
 			$personSearchResponse['authorPlan'] = $searchData['authorPlan'];
 
