@@ -1,0 +1,21 @@
+/*.*
+wp-admin
+wp-includes
+wp-content/*
+!.gitignore
+
+# Mighty Locator Theme
+!wp-content/themes
+wp-content/themes/*
+!wp-content/themes/mighty-locator
+wp-content/themes/mighty-locator/node_modules
+
+# Mighty Locator plugin
+!wp-content/plugins
+wp-content/plugins/*
+!wp-content/plugins/ml
+wp-content/plugins/ml/node_modules
+
+# Mighty Locator Blocks plugin
+!wp-content/plugins/mighty-locator-blocks
+wp-content/plugins/mighty-locator-blocks/node_modules
