@@ -24,21 +24,21 @@
 
 }
 
-.container{
+// .container{
 
-    width: 100%;
-    max-width: calc( $containerWidth + 2 * $gutterWidth ) ;
-    padding-left: $gutterWidth;
-    padding-right: $gutterWidth;
-    margin-left: auto;
-    margin-right: auto;
+//     width: 100%;
+//     max-width: calc( $containerWidth + 2 * $gutterWidth ) ;
+//     padding-left: $gutterWidth;
+//     padding-right: $gutterWidth;
+//     margin-left: auto;
+//     margin-right: auto;
 
-    &_wide{
-        max-width: 1700px;
-    }
+//     &_wide{
+//         max-width: 1700px;
+//     }
 
-    &_fullwidth{
-        max-width: 100%;
-    }
+//     &_fullwidth{
+//         max-width: 100%;
+//     }
 
-}
+// }
