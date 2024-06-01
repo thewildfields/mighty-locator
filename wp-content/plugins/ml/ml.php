@@ -3,10 +3,12 @@
 /**
  * Plugin name: ML
  * Author: Oleksii Tsioma
- */
+*/
+
+define( 'PLUGIN_DIR_PATH' , plugin_dir_path( __FILE__ ) );
 
 
-add_action( 'wp' , '___mlp__user_check' );
+// add_action( 'wp' , '___mlp__user_check' );
 
 function ___mlp__user_check(){
 
@@ -59,10 +61,6 @@ require plugin_dir_path( __FILE__ ) . '/inc/cpt/listing-cpt.php';
 // FUNCTIONS
 
 require plugin_dir_path( __FILE__ ) . '/inc/functions/person-search.php';
-
-add_action( 'wp_ajax_single_skip' , 'person_search');
-add_action( 'wp_ajax_nopriv_single_skip' , 'person_search');
-
 
 function batchSkip( $skipData ) {
 
@@ -149,3 +147,15 @@ function scf( $label ){
 add_action( 'wp_ajax_update_user_info' , 'update_user_info' );
 add_action( 'wp_ajax_nopriv_update_user_info' , 'update_user_info' );
 
+
+add_action( 'rest_api_init' , function(){
+	register_rest_route(
+		'ml/v2',
+		'person-search',
+		array(
+			'methods' => 'POST',
+			'callback' => 'person_search',
+			'permission_callback' => '__return_true'
+		)
+	);
+});
