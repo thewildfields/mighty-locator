@@ -1,0 +1,26 @@
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/ml-card/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-mighty-locator-card {
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.09);
+  position: relative;
+  overflow: hidden;
+  padding: 20px 30px;
+  margin-bottom: 40px;
+}
+.wp-block-mighty-locator-card:before {
+  content: "";
+  height: 100%;
+  width: 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--wp--preset--gradient--mighty-blue);
+}
