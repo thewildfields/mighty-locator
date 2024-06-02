@@ -1,6 +1,7 @@
 <?php 
 
 require_once PLUGIN_DIR_PATH . '/inc/functions/open-people-search-auth.php';
+require_once PLUGIN_DIR_PATH . '/inc/functions/person-display.php';
 
 function person_search( $req ){
 
@@ -11,7 +12,7 @@ function person_search( $req ){
 	$openpeoplesearchPeople = [];
 	$initialPeople = [];
 	$finalPeople = [];
-	$finalPeopleWithoutAddress = [];
+	$finalPeopleWithoutContacts = [];
 	$additionalAddresses = [];
 
 	// Direct Skip Search
@@ -54,7 +55,7 @@ function person_search( $req ){
 			$dob = array();
 			$middleName = array();
 			$person['firstName'] = ucFirst( strtolower( $nameArray->firstname ) );
-			$person['lastname'] = ucFirst( strtolower( $nameArray->lastname ) );
+			$person['lastName'] = ucFirst( strtolower( $nameArray->lastname ) );
 
 			if( $nameArray->age ){ $person['age'] = $nameArray->age; }
 
@@ -270,19 +271,125 @@ function person_search( $req ){
 				}
 			}
 		} else if( empty( $result['emails'] ) && empty($result['phones'] ) ){
-			$finalPeopleWithoutAddress[] = $result;
+			$finalPeopleWithoutContacts[] = $result;
 		} else {
 			$finalPeople[] = $result;
 		}
 
 	}
 
+	$postPrefixContent = '';
+
+	$postContent = '';
+
+	
+	if( $finalPeople ){
+		$postPrefixContent .= 'total people found = '.sizeof( $finalPeople);
+		$postContent .= '<h2>People</h2>';
+		foreach ($finalPeople as $person) {
+			$postContent .= person_display( $person );
+		};
+	}
+	
+	if( $finalPeopleWithoutContacts ){
+		$postPrefixContent .= 'incomplete people records found = '.sizeof( $finalPeopleWithoutContacts);
+		$postContent .= '<h2>People without Contacts</h2>';
+		foreach ($finalPeopleWithoutContacts as $person) {
+			$postContent .= person_display( $person );
+		};
+	}
+	
+	if( $additionalAddresses ){
+		$postPrefixContent .= 'additional addresses found = '.sizeof( $finalPeopleWithoutContacts);
+		$postContent .= '<h2>Additional Addresses</h2>';
+		$postContent .= person_data_display([
+			'hint' => 'We also found some addresses that are related to the person with the same name.',
+			'slug' => 'additional_addresses',
+			'data' => $additionalAddresses
+		]);
+	}
+
+
+	// $postPrefix = '
+	// <div class="psfPrefix colGr">
+	// 	<div class="colGr__col colGr__col_6">
+	// 		<div class="mlCard mlCard_withPrefix psfPrefix__searchData">
+	// 			<div class="mlCard__prefix mlCard__prefix_success"><span>Success</span></div>
+	// 			<div class="mlCard__content">
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">10</span>
+	// 					<span class="mlCard__statDescription">People found</span>
+	// 				</div>
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">15</span>
+	// 					<span class="mlCard__statDescription">People without contact information found</span>
+	// 				</div>
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">10</span>
+	// 					<span class="mlCard__statDescription">Additional addresses</span>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// 	<div class="colGr__col colGr__col_6">
+	// 		<div class="mlCard mlCard_withPrefix psfPrefix__billing">
+	// 			<div class="mlCard__prefix mlCard__prefix_info"><span>Billing</span></div>
+	// 			<div class="mlCard__content">
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">Free</span>
+	// 					<span class="mlCard__statDescription">Search price</span>
+	// 				</div>
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">15</span>
+	// 					<span class="mlCard__statDescription">Free searches available</span>
+	// 				</div>
+	// 				<div class="mlCard__stat">
+	// 					<span class="mlCard__statNum">$10.00</span>
+	// 					<span class="mlCard__statDescription">Account Balance</span>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// </div>';
+
+	$responsePost = wp_insert_post(
+		wp_slash(
+			array(
+				'post_type' => 'search',
+				'author' => get_current_user_id(),
+				'post_title' => $req['first-name'] . ' ' . $req['last-name'],
+				'post_status' => 'publish',
+				'post_content' => $postContent,
+				'meta_input' => array(
+					'people' => json_encode($finalPeople),
+					'additionalAddresses' => json_encode($additionalAddresses),
+					'finalPeopleWithoutContacts' => json_encode($finalPeopleWithoutContacts),
+				)
+			)
+		)
+	);
+
+	if( !is_wp_error( $responsePost ) ){
+		$response['status'] = ['success'];
+		$response['people'] = $finalPeople;
+		$response['finalPeopleWithoutContacts'] = $finalPeopleWithoutContacts;
+		$response['additionalAddresses'] = $additionalAddresses;
+		$response['content'] = json_encode( $postContent );
+		$response['postUrl'] = get_permalink( $responsePost );
+	} else {
+		$response['status'] = ['error'];
+		$response['people'] = $finalPeople;
+		$response['finalPeopleWithoutContacts'] = $finalPeopleWithoutContacts;
+		$response['additionalAddresses'] = $additionalAddresses;
+		$response['post'] = $responsePost;
+	}
+
 	$response['status'] = ['success'];
 	$response['people'] = $finalPeople;
-	$response['finalPeopleWithoutAddress'] = $finalPeopleWithoutAddress;
+	$response['finalPeopleWithoutContacts'] = $finalPeopleWithoutContacts;
 	$response['additionalAddresses'] = $additionalAddresses;
+	$response['content'] = json_encode( $postContent );
 
-
-	return json_encode( $response ) ;
+	return json_encode( $response );
 
 }

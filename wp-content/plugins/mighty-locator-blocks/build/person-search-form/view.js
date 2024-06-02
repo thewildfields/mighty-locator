@@ -129,8 +129,19 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable no-console */
 
 const submitButton = document.getElementById('person-serch-form-submit');
+const notificationTextContainer = document.querySelector('.psfWaiter__notification');
+const psfWaiterLoaderContainer = document.querySelector('.psfWaiter__loaderContainer');
+const resultArea = document.querySelector('.psfResult');
+const notificationList = ['Searching the databases', 'Comparing different sources', 'Filtering the data', 'Removing the dublicates', 'Saving the result', 'This takes longer than expected'];
+const enableWaiter = () => {
+  notificationTextContainer.textContent = notificationList[0];
+  psfWaiterLoaderContainer.classList.add('psfWaiter__loaderContainer_active');
+};
+const disableWaiter = () => {
+  notificationTextContainer.textContent = '';
+  psfWaiterLoaderContainer.classList.remove('psfWaiter__loaderContainer_active');
+};
 submitButton.addEventListener('click', function (e) {
-  console.log('loading');
   const form = this.closest('.psf');
   const inputs = form.querySelectorAll('.mlForm__input');
   const requiredInputs = form.querySelectorAll('.mlForm__input[required]');
@@ -145,6 +156,8 @@ submitButton.addEventListener('click', function (e) {
   if (requiredInputsHaveValues) {
     e.preventDefault();
     e.stopPropagation();
+    resultArea.innerHTML = '';
+    enableWaiter();
     const searchInput = {};
     inputs.forEach(input => {
       if (input.value) {
@@ -157,10 +170,9 @@ submitButton.addEventListener('click', function (e) {
       data: searchInput
     }).then(response => {
       const responseJSON = JSON.parse(response);
-      console.log(responseJSON);
-      // people.forEach(person => {
-      //     console.log( person );
-      // });
+      const content = JSON.parse(responseJSON.content);
+      resultArea.innerHTML += content;
+      disableWaiter();
     });
   }
 });

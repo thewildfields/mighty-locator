@@ -13,4 +13,43 @@
   padding: 2px;
 }
 
+.psfWaiter__loader {
+  color: var(--wp--preset--color--mighty-blue);
+  width: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
+  transform: translateX(-38px);
+  animation: l21 0.5s infinite alternate linear;
+}
+.psfWaiter__loaderContainer {
+  width: 150px;
+  height: 20px;
+  padding: 30px 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.psfWaiter__loaderContainer_active {
+  max-height: 150px;
+  opacity: 1;
+}
+.psfWaiter__notification {
+  text-align: center;
+}
+@keyframes l21 {
+  50% {
+    box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px;
+  }
+  100% {
+    box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px;
+  }
+}
+
 /*# sourceMappingURL=style-index.css.map*/

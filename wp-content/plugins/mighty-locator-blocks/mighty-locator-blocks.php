@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function create_block_mighty_locator_blocks_block_init() {
 	register_block_type( __DIR__ . '/build/ml-card' );
 	register_block_type( __DIR__ . '/build/person-search-form' );
+	register_block_type( __DIR__ . '/build/person-search-result' );
 	register_block_type( __DIR__ . '/build/user-header' );
 }
 add_action( 'init', 'create_block_mighty_locator_blocks_block_init' );

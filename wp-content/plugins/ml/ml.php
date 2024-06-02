@@ -55,7 +55,7 @@ function ___mlp__frontend_assets(){
 // CPT
 
 require plugin_dir_path( __FILE__ ) . '/inc/cpt/feature-cpt.php';
-require plugin_dir_path( __FILE__ ) . '/inc/cpt/skip-cpt.php';
+require plugin_dir_path( __FILE__ ) . '/inc/cpt/search-cpt.php';
 require plugin_dir_path( __FILE__ ) . '/inc/cpt/listing-cpt.php';
 
 // FUNCTIONS

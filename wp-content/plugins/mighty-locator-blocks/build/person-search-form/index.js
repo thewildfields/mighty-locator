@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Element} Element to render.
  */
 function save() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     className: "psf mlForm",
     method: "POST"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
@@ -162,7 +162,7 @@ function save() {
     className: "mlForm__input",
     name: "psf-first-name",
     type: "text",
-    value: "Travis",
+    value: "Oleksii",
     required: true
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "mlForm__label",
@@ -175,7 +175,7 @@ function save() {
     className: "mlForm__input",
     name: "psf-last-name",
     type: "text",
-    value: "Chillemi",
+    value: "Tsioma",
     required: true
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "mlForm__label",
@@ -375,7 +375,15 @@ function save() {
     className: "psf__submit",
     type: "submit",
     id: "person-serch-form-submit"
-  }, "Search"));
+  }, "Search")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "psfWaiter"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "psfWaiter__loaderContainer"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "psfWaiter__loader"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "psfWaiter__notification"
+  })));
 }
 
 /***/ }),

@@ -4,8 +4,8 @@ add_action( 'init' , '___mlp__register_skip_cpt' );
 
 function ___mlp__register_skip_cpt(){
 
-    register_post_type( 'skip', [
-		'label'  => 'Skip',
+    register_post_type( 'search', [
+		'label'  => 'Search',
 		'description'            => '',
 		'public'                 => true,
 		'show_in_menu'           => true,
@@ -22,3 +22,22 @@ function ___mlp__register_skip_cpt(){
 	] );
 
 }
+
+register_rest_field( 'search', 'meta', array(
+    'get_callback' => function ( $data ) {
+        return get_post_meta( $data['id'], '', '' );
+    }
+));
+
+// function register_custom_post_meta_field() {
+//     register_post_meta(
+//         'post',
+//         'custom_post_meta',
+//         [
+//             'type'         => 'string',
+//             'show_in_rest' => true,
+//             'single'       => true,
+//         ]
+//     );
+// }
+// add_action( 'init', 'register_custom_post_meta_field' );
