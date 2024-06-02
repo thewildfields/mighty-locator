@@ -1,10 +1,23 @@
 /*!************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/frontend.scss ***!
   \************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+/*!****************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/frontend.scss (1) ***!
+  \****************************************************************************************************************************/
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
 .colGr {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  column-gap: 20px;
+  column-gap: 48px;
 }
 .colGr__col {
   grid-column-start: auto;
@@ -50,6 +63,69 @@
   justify-content: flex-end;
 }
 
+.container {
+  width: 100%;
+  max-width: 1448px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container_wide {
+  max-width: 1700px;
+}
+.container_fullwidth {
+  max-width: 100%;
+}
+
+.ml {
+  font-family: "Mulish", sans-serif;
+  font-weight: 300;
+}
+.ml h1, .ml h2, .ml h3, .ml h4, .ml h5, .ml h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+h2 {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+body {
+  line-height: 1.5 !important;
+}
+
+.header {
+  background-color: #252930;
+  margin-bottom: 40px;
+  padding: 25px 0;
+}
+.header__menu {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+.header__menu .menu-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.875rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+.header__menu .menu-item a:hover {
+  opacity: 1;
+}
+.header__menu .menu-item.current-menu-item a {
+  opacity: 1;
+}
+
+.footer {
+  background-color: #dee2e6;
+  padding: 20px 0;
+}
+
 .mlForm__input {
   font-size: 1rem;
   width: 100%;
@@ -85,4 +161,131 @@
   transform: translateY(-20px);
   font-size: 0.75rem;
   z-index: 3;
+}
+
+.mlCard {
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.09);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 40px;
+}
+.mlCard:before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 100%;
+  background: var(--wp--preset--gradient--info);
+  background: linear-gradient(to bottom, #014CB1, #3477D3);
+  left: 0;
+  top: 0;
+}
+.mlCard_noprefix:before {
+  display: none;
+}
+.mlCard_noprefix .mlCard__content {
+  padding: 15px;
+}
+.mlCard_withPrefix {
+  display: grid;
+  grid-template-columns: 50px auto;
+  grid-template-rows: 100%;
+  padding: 0px;
+  gap: 0;
+}
+.mlCard_withPrefix:before {
+  display: none;
+}
+.mlCard__prefix {
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mlCard__prefix_success {
+  background: var(--wp--preset--gradient--success);
+}
+.mlCard__prefix_info {
+  background: var(--wp--preset--gradient--info);
+}
+.mlCard__prefix_warning {
+  background: var(--wp--preset--gradient--warning);
+}
+.mlCard__prefix_danger {
+  background: var(--wp--preset--gradient--danger);
+}
+.mlCard__prefix span {
+  display: block;
+  transform: rotate(-90deg);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+}
+.mlCard__content {
+  padding: 20px 30px;
+}
+.mlCard__links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mlCard__link {
+  display: block;
+  text-decoration: none;
+}
+.mlCard__link_big {
+  padding: 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.mlCard__link_big:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.mlCard__link_small {
+  padding: 5px;
+}
+.mlCard__link_small:hover {
+  text-decoration: underline;
+}
+
+.psfPerson__name {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.pageHeader {
+  display: grid;
+  grid-template-columns: [icon] 100px [content] auto;
+  column-gap: 30px;
+  margin-bottom: 40px;
+}
+.pageHeader__icon {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.pageHeader__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.pageHeader__content {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+.pageHeader__title {
+  font-size: 28px;
+  padding-top: 14px;
+  margin-bottom: 0;
+}
+.pageHeader__subtitle {
+  color: #303030;
+  opacity: 0.7;
+  font-size: 14px;
 }

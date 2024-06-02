@@ -42,3 +42,10 @@ function subscribe_to_facebook(){
 
 add_action( 'wp_ajax_subscribe_to_facebook' , 'subscribe_to_facebook' );
 add_action( 'wp_ajax_nopriv_subscribe_to_facebook' , 'subscribe_to_facebook' );
+
+add_action( 'after_setup_theme', function(){
+	register_nav_menus( [
+		'header_menu' => 'Header menu',
+		'footer_menu' => 'Footer menu'
+	] );
+} );

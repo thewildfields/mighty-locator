@@ -1,0 +1,119 @@
+.mlCard{
+
+    border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0,0,0,0.09);
+	position: relative;
+	overflow: hidden;
+    padding: 0;
+	margin-bottom: 40px;
+
+    &:before{
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 100%;
+        background: var(--wp--preset--gradient--info);
+        background: linear-gradient( to bottom , #014CB1 , #3477D3 );
+        left: 0;
+        top: 0;
+    }
+
+    &_noprefix{
+
+        &:before{
+            display: none;
+        }
+
+        .mlCard__content{
+            padding: 15px;
+        }
+    }
+
+    &_withPrefix{
+
+        display: grid;
+        grid-template-columns: 50px auto;
+        grid-template-rows: 100%;
+        padding: 0px;
+        gap: 0;
+
+        &:before{
+            display: none;
+        }
+
+    }
+
+    &__prefix{
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        &_success{
+            background: var(--wp--preset--gradient--success);
+        }
+    
+        &_info{
+            background: var(--wp--preset--gradient--info);
+        }
+    
+        &_warning{
+            background: var(--wp--preset--gradient--warning);
+        }
+    
+        &_danger{
+            background: var(--wp--preset--gradient--danger);
+        }
+
+        span{
+            display: block;
+            transform: rotate(-90deg);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            
+        }
+
+    }
+
+    &__content{
+        padding: 20px 30px;
+    }
+
+    &__links{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__link{
+
+        display: block;
+        text-decoration: none;
+
+        &_big{
+
+            padding: 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+
+            &:hover{
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+
+        }
+
+        &_small{
+
+            padding: 5px;
+
+            &:hover{
+                text-decoration: underline;
+            }
+
+        }
+    }
+
+}

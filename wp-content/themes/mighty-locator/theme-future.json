@@ -43,9 +43,24 @@
             ],
             "gradients": [
                 {
-                    "name": "Might blue gradient",
-                    "slug": "mighty-blue",
+                    "name": "Info gradient",
+                    "slug": "info",
                     "gradient": "linear-gradient( to bottom , #014CB1 , #3477D3 )"
+                },
+                {
+                    "name": "Success gradient",
+                    "slug": "success",
+                    "gradient": "linear-gradient( to bottom , #01B152 , #34D360 )"
+                },
+                {
+                    "name": "Danger gradient",
+                    "slug": "danger",
+                    "gradient": "linear-gradient( to bottom , #B12101 , #D35034 )"
+                },
+                {
+                    "name": "Warning gradient",
+                    "slug": "warning",
+                    "gradient": "linear-gradient( to bottom , #D8AA06 , #D3C334 )"
                 }
             ],
             "defaultPalette": false
