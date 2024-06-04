@@ -6,9 +6,11 @@ const mlInputs = document.querySelectorAll('.mlForm__input');
 
 const activateLabel = ( input ) => {
     const inputGroup = input.closest('.mlForm__inputGroup');
-    const label = inputGroup.querySelector('.mlForm__label');
-    if( label ){
-        label.classList.add('mlForm__label_active');
+    if( inputGroup ){
+        const label = inputGroup.querySelector('.mlForm__label');
+        if( label ){
+            label.classList.add('mlForm__label_active');
+        }
     }
 }
 
@@ -37,7 +39,21 @@ for (let i = 0; i < mlInputs.length; i++) {
 const submitButton = document.getElementById('person-serch-form-submit');
 const notificationTextContainer = document.querySelector('.psfWaiter__notification');
 const psfWaiterLoaderContainer = document.querySelector('.psfWaiter__loaderContainer');
+const waiterArea = document.querySelector('.psfWaiter');
 const resultArea = document.querySelector('.psfResult');
+const quickResultStatus = document.getElementById('preview-status');
+const quickResultPeopleCount = document.getElementById('preview-people-count');
+const quickResultAddressesCount = document.getElementById('preview-addresses-count');
+const quickResultPhonesCount = document.getElementById('preview-phones-count');
+const quickResultSearchType = document.getElementById('preview-search-type');
+const quickResultPreviewTimer = document.getElementById('preview-redirect-timer');
+const quickResultPreviewLink = document.getElementById('preview-redirect-link');
+const userFreeSearchesBalance = document.getElementById('user-freeSearcherBalance');
+const previewFreeSearchesBalance = document.getElementById('preview-freeSearcherBalance');
+
+let personSearchTimeout = 10;
+quickResultPreviewTimer.textContent = personSearchTimeout;
+
 
 const notificationList = [
     'Searching the databases',
@@ -45,64 +61,99 @@ const notificationList = [
     'Filtering the data',
     'Removing the dublicates',
     'Saving the result',
-    'This takes longer than expected'
+    'Finishing the job'
 ];
+let notificationIndex = 0;
 
 const enableWaiter = () => {
-    notificationTextContainer.textContent = notificationList[0];
+    notificationTextContainer.textContent = notificationList[notificationIndex];
     psfWaiterLoaderContainer.classList.add('psfWaiter__loaderContainer_active');
 }
 const disableWaiter = () => {
     notificationTextContainer.textContent = '';
     psfWaiterLoaderContainer.classList.remove('psfWaiter__loaderContainer_active');
+    waiterArea.remove();
+    waiterArea.style.display = 'none';
 }
 
-submitButton.addEventListener( 'click' , function(e){
-
-
-    const form = this.closest('.psf');
-    const inputs = form.querySelectorAll('.mlForm__input');
-    const requiredInputs = form.querySelectorAll('.mlForm__input[required]');
-
-    let requiredInputsHaveValues = true;
-
-    for (let i = 0; i < requiredInputs.length; i++) {
-        const val = requiredInputs[i].value.trim();
-        if( !val || val == '' || val.length == 0 ){
-            requiredInputsHaveValues = false;
-            break;
+if( submitButton ){
+    submitButton.addEventListener( 'click' , function(e){
+        waiterArea.style.display = 'block';
+    
+    
+        const form = this.closest('.psf');
+        const inputs = form.querySelectorAll('.mlForm__input');
+        const requiredInputs = form.querySelectorAll('.mlForm__input[required]');
+    
+        let requiredInputsHaveValues = true;
+    
+        for (let i = 0; i < requiredInputs.length; i++) {
+            const val = requiredInputs[i].value.trim();
+            if( !val || val == '' || val.length == 0 ){
+                requiredInputsHaveValues = false;
+                break;
+            }
         }
-    }
+    
+        if( requiredInputsHaveValues ){
+    
+            e.preventDefault();
+            e.stopPropagation();
+            enableWaiter();
 
-    if( requiredInputsHaveValues ){
+            setInterval( function(){
+                if( notificationIndex < notificationList.length - 1 ){
+                    notificationIndex++;
+                    notificationTextContainer.textContent = notificationList[notificationIndex];
+                }
+            } , 3500 )
+    
+            const searchInput = {
+                searchType: 'single'
+            };
 
-        e.preventDefault();
-        e.stopPropagation();
-        resultArea.innerHTML = '';
-        enableWaiter();
+            inputs.forEach(input => {
+                if( input.value ){
+                    searchInput[input.name.slice( 4 )] = input.value;
+                } 
+            });
+    
+            apiFetch( {
+                path: 'wp-json/ml/v2/person-search',
+                method: 'POST',
+                data: searchInput
+            } ).then( ( response ) => {
+                const responseJSON = JSON.parse( response );
+                console.log( responseJSON );
+                quickResultPeopleCount.textContent = responseJSON.totalPeopleCount;
+                quickResultStatus.textContent = responseJSON.status[0];
+                quickResultAddressesCount.textContent = responseJSON.addressesCount;
+                quickResultPhonesCount.textContent = responseJSON.phoneNumbersCount;
+                quickResultSearchType.textContent = searchInput.searchType;
+                quickResultPreviewLink.setAttribute( 'href', responseJSON.postUrl );
+                resultArea.classList.add('psfResult_active');
 
-        const searchInput = {};
-        inputs.forEach(input => {
-            if( input.value ){
-                searchInput[input.name.slice( 4 )] = input.value;
-            } 
-        });
+                if( 'free' == responseJSON.searchType ){
+                    userFreeSearchesBalance.textContent = responseJSON.freeSearchesBalance;
+                    previewFreeSearchesBalance.textContent = 'Free'
+                }
 
-        console.log( searchInput );
+                setInterval( function(){
+                    if( personSearchTimeout > 0){
+                        personSearchTimeout--;
+                        quickResultPreviewTimer.textContent = personSearchTimeout;
+                    }
+                } , 1000 )
 
-        apiFetch( {
-            path: '/ml/v2/person-search',
-            method: 'POST',
-            data: searchInput
-        } ).then( ( response ) => {
-            console.log( response );
-            // const responseJSON = JSON.parse( response );
-            // const content = JSON.parse( responseJSON.content );
-            // resultArea.innerHTML += content;
-            // disableWaiter();
+                disableWaiter();
 
-        } );
+                // setTimeout( function(){
+                //     window.location.href = responseJSON.postUrl;
+                // } , 10000 );
 
-    }
-
-})
+            } );
+    
+        }
+    
+    })
+}

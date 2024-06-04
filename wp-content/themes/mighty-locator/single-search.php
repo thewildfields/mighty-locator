@@ -6,15 +6,25 @@
 
 $metas = get_post_meta( $post->ID );
 
-$people = $metas['people'];
+$people = json_decode( get_post_meta( $post->ID , 'people' , true) );
 
-echo sizeof( $people );
+$prefixClasses = ['mlCard__prefix'];
+$searchStatus = $metas['searchStatus'][0];
 
-// foreach ($people as $person) {
-//     echo '<pre>';
-//     print_r( $person );
-//     echo '</pre>';
-// }
+switch ($searchStatus) {
+    case 'failed':
+        $prefixClasses[] = 'mlCard__prefix_danger';
+    break;
+    case 'partial':
+        $prefixClasses[] = 'mlCard__prefix_warning';
+    break;
+    case 'success':
+        $prefixClasses[] = 'mlCard__prefix_success';
+    break;
+    default:
+        $prefixClasses[] = 'mlCard__prefix_info';
+    break;
+}
 
 ?>
     <div class="container colGr">
@@ -22,21 +32,63 @@ echo sizeof( $people );
             <div class="pageHeader">
                 <div class="pageHeader__icon"></div>
                 <div class="pageHeader__content">
-                    <h1 class="pageHeader__title">First Last</h1>
+                    <h1 class="pageHeader__title"><?php the_title(); ?></h1>
                     <p class="pageHeader__subtitle"><?php the_time('F j, Y'); ?></p>
                 </div>
             </div>
         </div>
         <div class="colGr__col colGr__col_6">
             <div class="mlCard mlCard_withPrefix">
-                <div class="mlCard__prefix mlCard__prefix_success"><span>Success</span></div>
+                <div class="<?php echo implode(' ',$prefixClasses); ?>">
+                    <span><?php echo $metas['searchStatus'][0]; ?></span>
+                </div>
+                <div class="mlCard__content">
+                    <p class="mlCard__title">Search statistics</p>
+                    <div class="mlCard__stats">
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber"><?php echo $metas['totalPeopleCount'][0]; ?></p>
+                            <p class="mlCard__statDescription">people found</p>
+                        </div>
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber"><?php echo $metas['addressesCount'][0]; ?></p>
+                            <p class="mlCard__statDescription">Addresses</p>
+                        </div>
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber"><?php echo $metas['addressesCount'][0]; ?></p>
+                            <p class="mlCard__statDescription">Phone numbers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="colGr__col colGr__col_6">
+            <div class="mlCard mlCard_withPrefix">
+                <div class="mlCard__prefix mlCard__prefix_info"><span>Info</span></div>
+                <div class="mlCard__content">
+                    <p class="mlCard__title">Search information</p>
+                    <div class="mlCard__stats">
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber">Free</p>
+                            <p class="mlCard__statDescription">Search Price</p>
+                        </div>
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber">Single</p>
+                            <p class="mlCard__statDescription">Search type</p>
+                        </div>
+                        <div class="mlCard__stat">
+                            <p class="mlCard__statNumber">Professional</p>
+                            <p class="mlCard__statDescription">Membership Level</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="colGr__col colGr__col_6"></div>
         <div class="colGr__col colGr__col_12">
+            <h2>People</h2>
             <?php
                 foreach ($people as $person) {
-                    $person = (array) json_decode( $person )[0];
+                    $person = (array) $person;
             ?>
                 <div class="mlCard singleSearchCard">
                     <div class="mlCard__content">

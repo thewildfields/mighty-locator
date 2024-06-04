@@ -7,7 +7,7 @@ get_header(); ?>
 			<div class="mlCard__content">
 				<?php 
 				echo do_shortcode('[pms-account]');
-				echo do_shortcode('[basic-user-avatars]');
+				echo do_shortcode('[avatar_upload]');
 				?>
 			</div>
 		</div>

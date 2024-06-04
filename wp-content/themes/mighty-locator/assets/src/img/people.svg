@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <g id="Icons">
+    <g id="_96x96" data-name="96x96">
+      <g>
+        <g>
+          <circle class="cls-1" cx="24" cy="16" r="12"/>
+          <path class="cls-1" d="M20,40h8c8.83,0,16,7.17,16,16v4c0,4.42-3.58,8-8,8H12c-4.42,0-8-3.58-8-8v-4c0-8.83,7.17-16,16-16Z"/>
+        </g>
+        <g>
+          <circle class="cls-1" cx="56" cy="20" r="8"/>
+          <path class="cls-1" d="M52,40h8c4.42,0,8,3.58,8,8v4c0,2.21-1.79,4-4,4h-16c-2.21,0-4-1.79-4-4v-4c0-4.42,3.58-8,8-8Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

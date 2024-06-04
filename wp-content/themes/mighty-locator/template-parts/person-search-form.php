@@ -1,5 +1,8 @@
+<?php
+$member = get_member_data(get_current_user_id());
+?>
 <form class='psf mlForm' method='POST'>
-    <input type='hidden' name='psf-author-id' />
+    <input type='hidden' class="mlForm__input" name='psf-author-id' value="<?php echo $member['id']; ?>"  />
     <div class='colGr'>
         <div class='colGr__col colGr__col_6'>
             <div class='mlForm__inputGroup'>
@@ -114,12 +117,5 @@
             </div>
         </div>
     </div>
-        <button class='psf__submit' type='submit' id='person-serch-form-submit'>Search</button>
+        <button class='psf__submit button button_info' type='submit' id='person-serch-form-submit'>Search</button>
 </form>
-<div class='psfWaiter'>
-    <div class='psfWaiter__loaderContainer'>
-        <div class='psfWaiter__loader'></div>
-    </div>
-    <div class='psfWaiter__notification'></div>
-</div>
-<div class="psfResult"></div>

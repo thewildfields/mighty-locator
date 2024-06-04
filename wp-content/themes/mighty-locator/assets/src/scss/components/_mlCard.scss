@@ -51,19 +51,19 @@
         align-items: center;
     
         &_success{
-            background: var(--wp--preset--gradient--success);
+            background: $gradientSuccess;
         }
     
         &_info{
-            background: var(--wp--preset--gradient--info);
+            background: $gradientInfo;
         }
     
         &_warning{
-            background: var(--wp--preset--gradient--warning);
+            background: $gradientWarning
         }
     
         &_danger{
-            background: var(--wp--preset--gradient--danger);
+            background: $gradientDanger;
         }
 
         span{
@@ -85,7 +85,7 @@
     &__links{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
     }
 
     &__link{
@@ -95,9 +95,12 @@
 
         &_big{
 
-            padding: 15px;
-            border-radius: 5px;
+            padding: 10px 12px;
+            border-radius: 8px;
             transition: all 0.3s ease;
+            grid-template-columns: 20px auto;
+            column-gap: 10px;
+            align-items: center;
 
             &:hover{
                 box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -114,6 +117,36 @@
             }
 
         }
+
+        &_icon{
+            display: grid;
+        }
+    }
+
+    &__title{
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 10px;
+    }
+
+    &__stat{
+
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        margin-bottom: 10px;
+
+        &Number{
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-transform: uppercase;
+        }
+
+        &Description{
+            font-size: 1rem;
+            padding-bottom: 1px;
+        }
+
     }
 
 }

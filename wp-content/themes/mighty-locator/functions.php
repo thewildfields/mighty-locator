@@ -1,5 +1,7 @@
 <?php
 
+require_once get_template_directory() . '/inc/functions/get_member_data.php';
+
 add_theme_support( 'menus' );
 add_theme_support( 'custom-logo' );
 
