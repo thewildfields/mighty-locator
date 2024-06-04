@@ -5,4 +5,19 @@
 
 a{
     color: inherit;
+    text-decoration: none;
+}
+
+html{
+    margin: 0!important;
+}
+
+body{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 90px;
+}
+
+#wpadminbar{
+    display: none;
 }

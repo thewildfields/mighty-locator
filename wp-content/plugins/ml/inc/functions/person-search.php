@@ -19,6 +19,10 @@ function person_search( $req ){
 		);
 		$response['freeSearchesBalance'] = $newFreeSearchesBalance; 
 		$response['searchType'] = 'free'; 
+	} else {
+		if( $member['searchPrice'] >= $member['walletBalance'] ){
+			woo_wallet()->wallet->debit( $member['id'], $member['searchPrice'] );
+		}
 	}
 
 	$directskipResults = false;

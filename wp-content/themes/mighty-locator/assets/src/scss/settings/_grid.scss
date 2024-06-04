@@ -2,7 +2,7 @@
 
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    column-gap: calc( 2 * $gutterWidth );
+    column-gap: 36px;
 
     &__col{
 

@@ -12,12 +12,27 @@
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+html {
+  margin: 0 !important;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 90px;
+}
+
+#wpadminbar {
+  display: none;
 }
 
 .colGr {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  column-gap: 48px;
+  column-gap: 36px;
 }
 .colGr__col {
   grid-column-start: auto;
@@ -134,11 +149,23 @@ body {
     display: none;
   }
 }
-.footer {
-  background-color: #bdbdbd;
-  padding: 20px 0;
+body {
+  min-height: 100vh;
+  position: relative;
 }
 
+.footer {
+  background-color: #bdbdbd;
+  padding: 10px 0;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+}
+
+.mlForm {
+  column-gap: 30px;
+}
 .mlForm__input {
   font-size: 1rem;
   width: 100%;
@@ -152,6 +179,9 @@ body {
   z-index: 1;
   position: relative;
   background: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 4px 10px;
 }
 .mlForm__input[disabled] {
   border-color: white;
@@ -159,21 +189,17 @@ body {
 }
 .mlForm__inputGroup {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .mlForm__label {
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.3s ease;
   display: block;
-  position: absolute;
-  top: 12px;
-  z-index: 0;
-}
-.mlForm__label_active {
-  transform: translateY(-20px);
-  font-size: 0.75rem;
-  z-index: 3;
+  padding-left: 3px;
 }
 
 .psf__submit {
@@ -411,14 +437,14 @@ body {
   border-bottom: #bdbdbd 2px solid;
 }
 
-.listingsItem {
+.recentSearchItem {
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 55px auto;
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.listingsItem::after {
+.recentSearchItem::after {
   content: "";
   position: absolute;
   display: block;
@@ -431,24 +457,24 @@ body {
   opacity: 0.5;
   transition: all 0.3s ease;
 }
-.listingsItem:hover:after {
+.recentSearchItem:hover:after {
   opacity: 1;
 }
-.listingsItem .mlCard__content {
+.recentSearchItem .mlCard__content {
   padding-left: 25px;
   padding-right: 25px;
   align-items: center;
 }
-.listingsItem__status {
+.recentSearchItem__status {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.listingsItem__status_success {
+.recentSearchItem__status_success {
   background: linear-gradient(to bottom, #01B152, #34D360);
 }
-.listingsItem__status_success:after {
+.recentSearchItem__status_success:after {
   content: "";
   background-image: url(7cd3388b9a57d1420be1.svg);
   background-size: contain;
@@ -456,10 +482,10 @@ body {
   width: 22px;
   height: 22px;
 }
-.listingsItem__status_error {
+.recentSearchItem__status_error {
   background: linear-gradient(to bottom, #B12101, #D35034);
 }
-.listingsItem__status_error:after {
+.recentSearchItem__status_error:after {
   content: "";
   background-image: url(8fe756c50f091f4b1c6c.svg);
   background-size: contain;
@@ -467,10 +493,10 @@ body {
   width: 22px;
   height: 22px;
 }
-.listingsItem__status_warning {
+.recentSearchItem__status_warning {
   background: linear-gradient(to bottom, #D8AA06, #D3C334);
 }
-.listingsItem__status_warning:after {
+.recentSearchItem__status_warning:after {
   content: "";
   background-image: url(231d2fb10c335da4abfa.svg);
   transform: rotate(180deg);
@@ -479,23 +505,23 @@ body {
   width: 22px;
   height: 22px;
 }
-.listingsItem__title {
+.recentSearchItem__title {
   color: #303030;
   font-size: 0.9325rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-.listingsItem__stats {
+.recentSearchItem__stats {
   display: flex;
   gap: 15px;
   font-size: 0.875rem;
 }
-.listingsItem__people, .listingsItem__addresses {
+.recentSearchItem__people, .recentSearchItem__addresses {
   display: flex;
   align-items: center;
   font-size: 13px;
 }
-.listingsItem__people::before, .listingsItem__addresses::before {
+.recentSearchItem__people::before, .recentSearchItem__addresses::before {
   content: "";
   width: 16px;
   height: 16px;
@@ -504,13 +530,13 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.listingsItem__people::before {
+.recentSearchItem__people::before {
   background-image: url(ae4ecb342563ec9f660f.svg);
 }
-.listingsItem__addresses::before {
+.recentSearchItem__addresses::before {
   background-image: url(257679be23b90118cc02.svg);
 }
-.listingsItem__date {
+.recentSearchItem__date {
   font-size: 0.75rem;
   color: #303030;
   opacity: 0.75;
