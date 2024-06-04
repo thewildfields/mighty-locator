@@ -25,32 +25,6 @@ function admin_default_page() {
   
 add_filter('login_redirect', 'admin_default_page');
 
-// ASSETS
-
-add_action( 'init' , '___mlp__frontend_assets' );
-
-function ___mlp__frontend_assets(){
-
-	wp_enqueue_script(
-		$handle = 'single-skip',
-		$src = plugin_dir_url( __FILE__ ) . 'assets/dist/skip.js',
-		$deps = ['jquery'],
-		$ver = null,
-		$in_footer = true
-	);
-
-    $ajaxData = [
-        'admin_ajax_url' => admin_url( 'admin-ajax.php' ),
-        'nonce' => wp_create_nonce( 'nonce' )
-    ];
-
-    wp_add_inline_script(
-        $handle = 'single-skip',
-        $data = 'const ajaxObject = ' . wp_json_encode( $ajaxData ),
-        $position = 'before'
-    );
-
-}
 
 // CPT
 
