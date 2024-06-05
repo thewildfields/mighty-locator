@@ -153,9 +153,9 @@ if( submitButton ){
 
                 disableWaiter();
 
-                // setTimeout( function(){
-                //     window.location.href = responseJSON.postUrl;
-                // } , 10000 );
+                setTimeout( function(){
+                    window.location.href = responseJSON.postUrl;
+                } , 10000 );
 
             } );
     
