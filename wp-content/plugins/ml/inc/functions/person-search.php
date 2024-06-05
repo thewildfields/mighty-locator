@@ -11,6 +11,7 @@ function person_search( $req ){
  	$searchPrice = (float) $req['search-price'];
 	$walletBalance = (float) $req['wallet-balance'];
 	$newWalletBalance = $walletBalance;
+	$searchType = 'free';
 
 
 	if( $req['free-searches-balance'] && $req['free-searches-balance'] > 0 ){
@@ -23,7 +24,7 @@ function person_search( $req ){
 		);
 		$response['freeSearchesBalance'] = $newFreeSearchesBalance;
 	} else {
-		$response['searchType'] = 'paid'; 
+		$searchType = 'paid'; 
 		woo_wallet()->wallet->debit(
 			$user_id = $req['author-id'],
 			$amount = $searchPrice
@@ -31,7 +32,7 @@ function person_search( $req ){
 		$newWalletBalance = $walletBalance - $searchPrice;
 	}
 
-	$searchPrice = $response['searchType'] == 'free' ? 'Free' : '$'.$searchPrice;
+	$searchPrice = $searchType == 'free' ? 'Free' : '$'.$searchPrice;
 
 
 	$directskipResults = false;
@@ -382,6 +383,7 @@ function person_search( $req ){
 	$response['newWalletBalance'] = $newWalletBalance;
 	$response['searchPrice'] = $searchPrice;
 	$response['wallet'] = woo_wallet( 1);
+	$response['searchType'] = $searchType;
 
 	return json_encode( $response );
 
