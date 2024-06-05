@@ -120,8 +120,6 @@ if( submitButton ){
                     searchInput[input.name.slice( 4 )] = input.value;
                 }
             });
-
-            console.log( searchInput );
     
             apiFetch( {
                 path: 'wp-json/ml/v2/person-search',
@@ -142,7 +140,7 @@ if( submitButton ){
                     userFreeSearchesBalance.textContent = responseJSON.freeSearchesBalance;
                     searchPrice.textContent = 'Free'
                 } else if( 'paid' == responseJSON.searchType ){
-                    searchPrice.textContent = '$' + responseJSON.searchPrice;
+                    searchPrice.textContent = responseJSON.searchPrice;
                     userWalletBalance.textContent = '$' + responseJSON.newWalletBalance;
                 }
 

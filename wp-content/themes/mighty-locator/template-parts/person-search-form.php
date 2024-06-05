@@ -5,6 +5,7 @@ $member = get_member_data(get_current_user_id());
     <input type='hidden' class="mlForm__input" name='psf-author-id' value="<?php echo $member['id']; ?>"  />
     <input type='hidden' class="mlForm__input" name='psf-wallet-balance' value="<?php echo $member['walletBalance']; ?>"  />
     <input type='hidden' class="mlForm__input" name='psf-search-price' value="<?php echo $member['searchPrice']; ?>"  />
+    <input type='hidden' class="mlForm__input" name='psf-free-searches-balance' value="<?php echo $member['freeSearchesBalance']; ?>"  />
     <div class='colGr__col colGr__col_6'>
         <div class='mlForm__inputGroup'>
             <label class='mlForm__label' for='psf-first-name'>First Name</label>

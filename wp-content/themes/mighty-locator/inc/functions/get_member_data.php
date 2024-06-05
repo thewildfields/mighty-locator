@@ -2,6 +2,10 @@
 
 function get_member_data($cuID){
 
+    if( !is_user_logged_in() ){
+        return false;
+    }
+
     $freeSearchesBalance = get_field('free_searches_balance','user_'.$cuID) ?
         get_field('free_searches_balance','user_'.$cuID): 
         '0';

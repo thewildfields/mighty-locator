@@ -1,3 +1,6 @@
+<?php 
+$member = get_member_data(get_current_user_id());
+?>
 <div class="psfResult">
     <h2>Result Preview</h2>
     <div class="colGr">

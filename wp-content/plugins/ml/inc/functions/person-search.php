@@ -5,31 +5,34 @@ require_once PLUGIN_DIR_PATH . '/inc/functions/person-display.php';
 
 function person_search( $req ){
 
-	$member = get_member_data($req['author-id']);
-
 	$response = [];
 
-	if( $member['freeSearchesBalance'] && $member['freeSearchesBalance'] > 0 ){
-		$newFreeSearchesBalance = $member['freeSearchesBalance'] - 1;
+	// $userId = $req['author-id'];
+ 	$searchPrice = (float) $req['search-price'];
+	$walletBalance = (float) $req['wallet-balance'];
+	$newWalletBalance = $walletBalance;
+
+
+	if( $req['free-searches-balance'] && $req['free-searches-balance'] > 0 ){
+		$newFreeSearchesBalance = $req['free-searches-balance'] - 1;
 		update_user_meta(
-			$member['id'],
+			$userId,
 			'free_searches_balance',
 			$newFreeSearchesBalance,
-			$member['freeSearchesBalance']
+			$req['free-searches-balance']
 		);
-		$response['freeSearchesBalance'] = $newFreeSearchesBalance; 
-		$response['searchType'] = 'free'; 
+		$response['freeSearchesBalance'] = $newFreeSearchesBalance;
 	} else {
 		$response['searchType'] = 'paid'; 
-		if( $member['searchPrice'] >= $member['walletBalance'] ){
-			woo_wallet()->wallet->debit(
-				$user_id = $req['author-id'],
-				$amount = $member['searchPrice']
-			);
-			$newWalletBalance = $req['wallet-balance'] - $req['search-price'];
-			$searchPrice = $member['searchPrice'];
-		}
+		woo_wallet()->wallet->debit(
+			$user_id = $req['author-id'],
+			$amount = $searchPrice
+		);
+		$newWalletBalance = $walletBalance - $searchPrice;
 	}
+
+	$searchPrice = $response['searchType'] == 'free' ? 'Free' : '$'.$searchPrice;
+
 
 	$directskipResults = false;
 	$openpeoplesearchResults = false;
@@ -345,7 +348,8 @@ function person_search( $req ){
 					'addressesCount' => $addressesCount,
 					'phoneNumbersCount' => $phoneNumbersCount,
 					'searchStatus' => $searchStatus,
-					'searchType' => $response['searchType']
+					'searchType' => $response['searchType'],
+					'searchPrice' => $searchPrice,
 				)
 			)
 		)
@@ -377,6 +381,7 @@ function person_search( $req ){
 	$response['searchStatus'] = $searchStatus;
 	$response['newWalletBalance'] = $newWalletBalance;
 	$response['searchPrice'] = $searchPrice;
+	$response['wallet'] = woo_wallet( 1);
 
 	return json_encode( $response );
 

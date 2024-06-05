@@ -4,10 +4,11 @@
 ?>
 <?php 
 
+$member = get_member_data( get_current_user_id() );
 $metas = get_post_meta( $post->ID );
-
 $people = json_decode( get_post_meta( $post->ID , 'people' , true) );
-
+$peopleWithoutContacts = json_decode( get_post_meta( $post->ID, 'finalPeopleWithoutContacts', true ) );
+$additionalAddresses = json_decode( get_post_meta( $post->ID, 'additionalAddresses', true ) );
 $prefixClasses = ['mlCard__prefix'];
 $searchStatus = $metas['searchStatus'][0];
 
@@ -68,7 +69,7 @@ switch ($searchStatus) {
                     <p class="mlCard__title">Search information</p>
                     <div class="mlCard__stats">
                         <div class="mlCard__stat">
-                            <p class="mlCard__statNumber">Free</p>
+                            <p class="mlCard__statNumber"><?php echo $metas['searchPrice'][0]; ?></p>
                             <p class="mlCard__statDescription">Search Price</p>
                         </div>
                         <div class="mlCard__stat">
@@ -76,7 +77,7 @@ switch ($searchStatus) {
                             <p class="mlCard__statDescription">Search type</p>
                         </div>
                         <div class="mlCard__stat">
-                            <p class="mlCard__statNumber">Professional</p>
+                            <p class="mlCard__statNumber"><?php echo $member['membershipLevel']; ?></p>
                             <p class="mlCard__statDescription">Membership Level</p>
                         </div>
                     </div>
@@ -85,7 +86,9 @@ switch ($searchStatus) {
         </div>
         <div class="colGr__col colGr__col_6"></div>
         <div class="colGr__col colGr__col_12">
+
             <h2>People</h2>
+
             <?php
                 foreach ($people as $person) {
                     $person = (array) $person;
@@ -139,6 +142,59 @@ switch ($searchStatus) {
                     </div>
                 </div>
             <?php }?>
+
+            <h2>Additional People Without Contacts</h2>
+
+            <?php
+                foreach ($peopleWithoutContacts as $person) {
+                    $person = (array) $person;
+            ?>
+                <div class="mlCard singleSearchCard">
+                    <div class="mlCard__content">
+                        <div class="mlCard__contentHeader">
+                            <h2 class="singleSearchCard__title"><?php echo $person['firstName'].' '.$person['lastName']; ?></h2>
+                        </div>
+                        <div class="mlCard__contentBody">
+                            <div class="singleSearchCard__section">
+                                <h3 class="singleSearchCard__sectionTitle">Addresses</h3>
+                                <div class="singleSearchCard__sectionContent">
+                                    <?php if( sizeof( $person['addresses'] ) ) {
+                                        foreach ($person['addresses'] as $address) {
+                                            $addressArray = (array) json_decode( $address ) ?>
+                                            <p><?php
+                                                echo $addressArray['street'].', '.
+                                                $addressArray['city'].', '.
+                                                $addressArray['state'].' '.
+                                                $addressArray['zip'];
+                                            ?></p>
+                                        <?php }
+                                    } else { ?>
+                                        no emails
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mlCard__contentFooter"></div>
+                    </div>
+                </div>
+            <?php }?>
+            
+            <h2>Additional Addresses</h2>
+
+            <div class="mlCard">
+                <div class="mlCard__content">
+                    <?php foreach ($additionalAddresses as $address) {
+                        $addressArray = (array) $address ?>
+                        <p><?php
+                            echo $addressArray['street'].', '.
+                            $addressArray['city'].', '.
+                            $addressArray['state'].' '.
+                            $addressArray['zip'];
+                        ?></p>
+                    <?php } ?>
+                </div>
+            </div>
+
         </div>
     </div>
 <?php
