@@ -11,7 +11,7 @@ $member = get_member_data(get_current_user_id());
         <div class="listings">
             <?php
             if( have_posts() ) : while( have_posts() ) : the_post();
-                echo get_template_part('template-parts/recent-search','item');
+                echo get_template_part('template-parts/recent-searches','item');
             endwhile; endif;
             ?>
         </div>

@@ -17,7 +17,7 @@ $member = get_member_data(get_current_user_id());
                 <p class="mlCard__statDescription">Free Searches</p>
             </div>
             <div class="mlCard__stat">
-                <p class="mlCard__statNumber">$<?php echo $member['walletBalance']; ?></p>
+                <p class="mlCard__statNumber" id="user-walletBalance">$<?php echo $member['walletBalance']; ?></p>
                 <p class="mlCard__statDescription">Wallet Balance</p>
             </div>
             <?php if( 'No' != $member['membershipLevel'] ) { ?>

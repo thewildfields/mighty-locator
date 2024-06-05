@@ -143,17 +143,59 @@ body {
 .header__menu .menu-item.current-menu-item a {
   opacity: 1;
 }
+.headerUserarea {
+  display: grid;
+  grid-template-columns: auto 40px;
+  position: relative;
+  width: 200px;
+  margin-left: auto;
+  align-items: center;
+}
+.headerUserarea__name {
+  color: white;
+}
+.headerUserarea__userpic {
+  padding: 0;
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.headerUserarea__userpic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.headerUserarea__dropdown {
+  position: absolute !important;
+  right: 0;
+  padding-top: 10px;
+  top: 100%;
+  min-width: 200px;
+  display: none;
+}
+.headerUserarea__dropdownItem {
+  text-align: right;
+}
+.headerUserarea__dropdownItem:not(:last-child) {
+  margin-bottom: 5px;
+}
+.headerUserarea__dropdownSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.headerUserarea:hover .headerUserarea__dropdown {
+  display: block;
+}
 
 @media screen and (max-width: 768px) {
   .header__menu {
     display: none;
   }
 }
-body {
-  min-height: 100vh;
-  position: relative;
-}
-
 .footer {
   background-color: #bdbdbd;
   padding: 10px 0;
@@ -201,10 +243,16 @@ body {
   display: block;
   padding-left: 3px;
 }
+.mlForm__hint {
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: right;
+}
 
 .psf__submit {
   border: none;
   margin: 10px 0 10px auto;
+  cursor: pointer;
 }
 
 .psfResult {
@@ -281,6 +329,7 @@ body {
   overflow: hidden;
   padding: 0;
   margin-bottom: 40px;
+  background-color: white;
 }
 .mlCard:before {
   content: "";
@@ -337,6 +386,13 @@ body {
 }
 .mlCard__content {
   padding: 20px 30px;
+}
+.mlCard__contentBody {
+  padding-bottom: 10px;
+}
+.mlCard__contentFooter {
+  padding-top: 10px;
+  border-top: 1px solid #bdbdbd;
 }
 .mlCard__links {
   display: flex;

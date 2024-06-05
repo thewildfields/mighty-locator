@@ -6,6 +6,7 @@
 	overflow: hidden;
     padding: 0;
 	margin-bottom: 40px;
+    background-color: white;
 
     &:before{
         content: '';
@@ -79,7 +80,18 @@
     }
 
     &__content{
+
         padding: 20px 30px;
+
+        &Body{
+            padding-bottom: 10px;
+        }
+
+        &Footer{
+            padding-top: 10px;
+            border-top: 1px solid $grey;
+        }
+
     }
 
     &__links{

@@ -3,6 +3,8 @@ $member = get_member_data(get_current_user_id());
 ?>
 <form class='psf mlForm colGr' method='POST'>
     <input type='hidden' class="mlForm__input" name='psf-author-id' value="<?php echo $member['id']; ?>"  />
+    <input type='hidden' class="mlForm__input" name='psf-wallet-balance' value="<?php echo $member['walletBalance']; ?>"  />
+    <input type='hidden' class="mlForm__input" name='psf-search-price' value="<?php echo $member['searchPrice']; ?>"  />
     <div class='colGr__col colGr__col_6'>
         <div class='mlForm__inputGroup'>
             <label class='mlForm__label' for='psf-first-name'>First Name</label>
@@ -117,9 +119,17 @@ $member = get_member_data(get_current_user_id());
         </div>
     </div>
     <div class="colGr__col colGr__col_8">
-        <p class="mlForm__hint">You are about to run a free single search</p>
     </div>
     <div class="colGr__col colGr__col_4">
+        <p class="mlForm__hint">
+            <?php 
+            if( $member['freeSearchesBalance'] > 0 ){
+                echo 'Run free search';
+            } else {
+                echo 'Run a paid search for $'.$member['searchPrice'];
+            }
+            ?>
+        </p>
         <button class='psf__submit button button_info' type='submit' id='person-serch-form-submit'>Search</button>
     </div>
 </form>

@@ -20,8 +20,14 @@ function person_search( $req ){
 		$response['freeSearchesBalance'] = $newFreeSearchesBalance; 
 		$response['searchType'] = 'free'; 
 	} else {
+		$response['searchType'] = 'paid'; 
 		if( $member['searchPrice'] >= $member['walletBalance'] ){
-			woo_wallet()->wallet->debit( $member['id'], $member['searchPrice'] );
+			woo_wallet()->wallet->debit(
+				$user_id = $req['author-id'],
+				$amount = $member['searchPrice']
+			);
+			$newWalletBalance = $req['wallet-balance'] - $req['search-price'];
+			$searchPrice = $member['searchPrice'];
 		}
 	}
 
@@ -350,7 +356,6 @@ function person_search( $req ){
 		$response['people'] = $finalPeople;
 		$response['finalPeopleWithoutContacts'] = $finalPeopleWithoutContacts;
 		$response['additionalAddresses'] = $additionalAddresses;
-		$response['content'] = json_encode( $postContent );
 		$response['postUrl'] = get_permalink( $responsePost );
 	} else {
 		$response['status'] = ['error'];
@@ -364,13 +369,14 @@ function person_search( $req ){
 	$response['people'] = $finalPeople;
 	$response['finalPeopleWithoutContacts'] = $finalPeopleWithoutContacts;
 	$response['additionalAddresses'] = $additionalAddresses;
-	$response['content'] = json_encode( $postContent );
-	$response['peopleCount'] = json_encode( $peopleCount );
-	$response['peopleWithoutAddressesCount'] = json_encode( $peopleWithoutAddressesCount );
-	$response['totalPeopleCount'] = json_encode( $totalPeopleCount );
-	$response['addressesCount'] = json_encode( $addressesCount );
-	$response['phoneNumbersCount'] = json_encode( $phoneNumbersCount );
-	$response['searchStatus'] = json_encode( $searchStatus );
+	$response['peopleCount'] = $peopleCount;
+	$response['peopleWithoutAddressesCount'] = $peopleWithoutAddressesCount;
+	$response['totalPeopleCount'] = $totalPeopleCount;
+	$response['addressesCount'] = $addressesCount;
+	$response['phoneNumbersCount'] = $phoneNumbersCount;
+	$response['searchStatus'] = $searchStatus;
+	$response['newWalletBalance'] = $newWalletBalance;
+	$response['searchPrice'] = $searchPrice;
 
 	return json_encode( $response );
 

@@ -44,11 +44,18 @@
         padding-left: 3px;
     }
 
+    &__hint{
+        font-size: 0.75rem;
+        font-style: italic;
+        text-align: right;
+    }
+
 }
 
 .psf__submit{
     border: none;
     margin: 10px 0 10px auto;
+    cursor: pointer;
 }
 
 .psfResult{

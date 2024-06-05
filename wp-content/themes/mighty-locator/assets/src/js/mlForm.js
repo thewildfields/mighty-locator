@@ -49,10 +49,13 @@ const quickResultSearchType = document.getElementById('preview-search-type');
 const quickResultPreviewTimer = document.getElementById('preview-redirect-timer');
 const quickResultPreviewLink = document.getElementById('preview-redirect-link');
 const userFreeSearchesBalance = document.getElementById('user-freeSearcherBalance');
-const previewFreeSearchesBalance = document.getElementById('preview-freeSearcherBalance');
+const searchPrice = document.getElementById('preview-searchPrice');
+const userWalletBalance = document.getElementById('user-walletBalance');
 
 let personSearchTimeout = 10;
-quickResultPreviewTimer.textContent = personSearchTimeout;
+if( quickResultPreviewTimer ){
+    quickResultPreviewTimer.textContent = personSearchTimeout;
+}
 
 
 const notificationList = [
@@ -115,8 +118,10 @@ if( submitButton ){
             inputs.forEach(input => {
                 if( input.value ){
                     searchInput[input.name.slice( 4 )] = input.value;
-                } 
+                }
             });
+
+            console.log( searchInput );
     
             apiFetch( {
                 path: 'wp-json/ml/v2/person-search',
@@ -135,7 +140,10 @@ if( submitButton ){
 
                 if( 'free' == responseJSON.searchType ){
                     userFreeSearchesBalance.textContent = responseJSON.freeSearchesBalance;
-                    previewFreeSearchesBalance.textContent = 'Free'
+                    searchPrice.textContent = 'Free'
+                } else if( 'paid' == responseJSON.searchType ){
+                    searchPrice.textContent = '$' + responseJSON.searchPrice;
+                    userWalletBalance.textContent = '$' + responseJSON.newWalletBalance;
                 }
 
                 setInterval( function(){
