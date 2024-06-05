@@ -7,7 +7,7 @@ function person_search( $req ){
 
 	$response = [];
 
-	// $userId = $req['author-id'];
+	$userId = $req['author-id'];
  	$searchPrice = (float) $req['search-price'];
 	$walletBalance = (float) $req['wallet-balance'];
 	$newWalletBalance = $walletBalance;
