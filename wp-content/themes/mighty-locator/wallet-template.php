@@ -1,4 +1,8 @@
-<?php
+<?php 
+
+/**
+ * Template name: Wallet
+ */
 
 get_header();
 
@@ -21,11 +25,11 @@ $userData = get_userdata( get_current_user_id() );
         </div>
     </div>
 	<div class="colGr__col colGr__col_8">
+        <h2>My Wallet</h2>
 		<div class="mlCard accountSettings">
 			<div class="mlCard__content">
 				<?php 
-				echo do_shortcode('[pms-account]');
-				echo do_shortcode('[avatar_upload]');
+				echo do_shortcode('[woo-wallet]');
 				?>
 			</div>
 		</div>

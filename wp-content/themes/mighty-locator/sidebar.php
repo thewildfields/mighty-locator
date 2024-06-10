@@ -37,15 +37,15 @@ $member = get_member_data(get_current_user_id());
             <a
                 class="mlCard__link mlCard__link_big mlCard__link_icon"
                 href="<?php echo home_url('account/profile'); ?>"
-                target="_blank"
+                
             >
                 <img src="<?php echo bloginfo('template_url') . '/assets/src/img/profile.svg'; ?>" alt="" class="icon">
                 <span>Edit Profile</span>
             </a>
             <a
                 class="mlCard__link mlCard__link_big mlCard__link_icon"
-                href="<?php echo home_url('my-account/woo-wallet/add'); ?>"
-                target="_blank"
+                href="<?php echo home_url('/wallet/'); ?>"
+                
             >
                 <img src="<?php echo bloginfo('template_url') . '/assets/src/img/wallet.svg'; ?>" alt="" class="icon">
                 <span>Recharge Wallet</span>
@@ -53,7 +53,7 @@ $member = get_member_data(get_current_user_id());
             <a
                 class="mlCard__link mlCard__link_big mlCard__link_icon"
                 href="https://mighty-locator.ddev.site:9999/account/subscriptions/"
-                target="_blank"
+                
             >
                 <img src="<?php echo bloginfo('template_url') . '/assets/src/img/membership.svg'; ?>" alt="" class="icon">
                 <span>Review Membership</span>
@@ -61,7 +61,7 @@ $member = get_member_data(get_current_user_id());
             <a
                 class="mlCard__link mlCard__link_big mlCard__link_icon"
                 href="<?php echo home_url('/support'); ?>"
-                target="_blank"
+                
             >
                 <img src="<?php echo bloginfo('template_url') . '/assets/src/img/support.svg'; ?>" alt="" class="icon">
                 <span>Contact Support</span>
@@ -87,7 +87,7 @@ $member = get_member_data(get_current_user_id());
                 <a
                     class="mlCard__link mlCard__link_small mlCard__link_icon"
                     href="<?php the_permalink(); ?>"
-                    target="_blank"
+                    
                 ><?php the_title(); ?></a>
             <?php endwhile; wp_reset_postdata(); endif; ?>
         </div>

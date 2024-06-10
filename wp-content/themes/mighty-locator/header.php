@@ -6,6 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<?php wp_head(); ?>
 
+	<?php
+		if( is_front_page() ){
+			$title = get_bloginfo();
+		} else if( is_archive() ){
+			$title = get_the_archive_title();
+		} else {
+			$title = get_the_title();
+		}
+	?>
+	<title><?php echo $title; ?></title>
+
 </head>
 
 <?php 
@@ -16,7 +27,7 @@ $member = get_member_data(get_current_user_id());
 
 <body class="ml">
 	<header class="header">
-		<div class="container colGr">
+		<div class="container colGr header__container">
 			<div class="colGr__col_8">
 				<?php wp_nav_menu(
 					array(

@@ -119,9 +119,9 @@ $member = get_member_data(get_current_user_id());
             <input class='mlForm__input' name='psf-relatives' type='text' placeholder='Claude Monet, Jackson Pollock' />
         </div>
     </div>
-    <div class="colGr__col colGr__col_8">
+    <div class="colGr__col colGr__col_6">
     </div>
-    <div class="colGr__col colGr__col_4">
+    <div class="colGr__col colGr__col_6">
         <p class="mlForm__hint">
             <?php 
             if( $member['freeSearchesBalance'] > 0 ){

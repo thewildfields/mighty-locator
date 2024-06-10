@@ -1,0 +1,53 @@
+.accountSettings{
+    
+    .mlForm{
+
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+
+        &__input{
+            border-color: black!important;
+            background-color: transparent!important;
+            cursor: not-allowed;
+        }
+
+    }
+
+    #wpua-thumbnail-existing{
+        display: none;
+    }
+
+    #wpua-add-existing,
+    #wpua-remove-existing,
+    #wpua-undo-button-existing,
+    #submit{
+        background: $gradientInfo;
+        padding: 7px 10px;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+
+}
+
+.woo-wallet-my-wallet-container{
+
+    border: none!important;
+
+    .woo-wallet-sidebar{
+
+        background-color: white!important;
+        
+        ul{
+
+            padding-left: 0;
+
+            span{
+                margin-bottom: 7px;
+            }
+
+        }
+    }
+
+}
