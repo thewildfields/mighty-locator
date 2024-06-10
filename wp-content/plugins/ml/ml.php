@@ -8,7 +8,7 @@
 define( 'PLUGIN_DIR_PATH' , plugin_dir_path( __FILE__ ) );
 
 
-add_action( 'wp' , '___mlp__user_check' );
+// add_action( 'wp' , '___mlp__user_check' );
 
 function ___mlp__user_check(){
 
