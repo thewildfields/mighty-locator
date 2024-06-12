@@ -28,7 +28,9 @@ $member = get_member_data(get_current_user_id());
         </div>
         <?php the_posts_pagination(); ?>
     </div>
-    <div class="colGr__col colGr__col_4"></div>
+    <div class="colGr__col colGr__col_4">
+        <?php get_sidebar(); ?>
+    </div>
 </div>
 
 

@@ -15,7 +15,6 @@
 			$title = get_the_title();
 		}
 	?>
-	<title><?php echo $title; ?></title>
 
 </head>
 
@@ -29,13 +28,17 @@ $member = get_member_data(get_current_user_id());
 	<header class="header">
 		<div class="container colGr header__container">
 			<div class="colGr__col_8">
-				<?php wp_nav_menu(
-					array(
+				<?php
+				
+				if( is_user_logged_in() ){
+					wp_nav_menu( array(
 						'menu_location' => 'header_menu',
 						'container' => false,
 						'menu_class' => 'header__menu'
-					)
-				)?>
+					) );
+				}
+				
+				?>
 			</div>
 			<div class="colGr__col_4">
 				<?php if( is_user_logged_in() ) { ?>
